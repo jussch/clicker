@@ -7,10 +7,11 @@ import applyBattler, { BATTLER_ATTRIBUTES } from './extensions/applyBattler';
 
 export const Schema = {
   ...BATTLER_ATTRIBUTES,
+  gold: 100,
 }
 
 const enhance = compose(
-  applyBattler,
+  applyBattler(),
 );
 
 export default class Player extends enhance(createModel(Schema)) {
