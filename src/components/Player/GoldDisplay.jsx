@@ -20,7 +20,7 @@ function GoldDisplay(props) {
 
   return (
     <span>
-      Gold (+{goldPerSecond}/s): {goldRounded} <button onClick={updateGoldPerSecond}>Increase</button>
+      Gold: {goldRounded} (+{goldPerSecond.toFixed(2)}/s) <button onClick={updateGoldPerSecond}>Increase</button>
     </span>
   )
 }

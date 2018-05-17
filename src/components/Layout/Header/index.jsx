@@ -4,7 +4,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
-import GoldDisplay from '../../Player/GoidDisplay';
+import GoldDisplay from '../../Player/GoldDisplay';
 
 import styles from './header.scss';
 

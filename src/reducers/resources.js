@@ -6,7 +6,7 @@ import { Map } from 'immutable';
 import Resource from '../models/Resource';
 import {
   UPDATE_RESOURCE,
-  PROGRESS_RESOURCES,
+  PROGRESS_RESOURCES, ADD_RESOURCE,
 } from '../actions/ResourceActions';
 
 export const initialState = Map({
@@ -18,6 +18,11 @@ export default handleActions({
   [UPDATE_RESOURCE](state, action) {
     const { resource, type } = action.payload;
     return state.mergeIn([type], resource);
+  },
+
+  [ADD_RESOURCE](state, action) {
+    const { amount, type } = action.payload;
+    return state.updateIn([type, 'amount'], currentAmount => currentAmount + amount);
   },
 
   [PROGRESS_RESOURCES](state, action) {
