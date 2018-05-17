@@ -6,6 +6,3 @@ export function selectPlayer(state) {
   return state.get('player');
 }
 
-export function selectPlayerGold(state) {
-  return selectPlayer(state).get('gold');
-}

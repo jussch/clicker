@@ -3,33 +3,60 @@
  */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { compose } from 'recompose';
+import { compose, withHandlers } from 'recompose';
 import { connect } from 'react-redux';
-import { selectPlayerGold } from '../../selectors/PlayerSelectors';
+import { bindActionCreators } from 'redux';
+import { selectCurrentGold, selectGoldPerSecond } from '../../selectors/ResourceSelectors';
+import { updateGold } from '../../actions/ResourceActions';
 
 function GoldDisplay(props) {
   const {
     gold,
+    goldPerSecond,
+    updateGoldPerSecond,
   } = props;
 
+  const goldRounded = Math.floor(gold);
+
   return (
-    <span>Gold: {gold}</span>
+    <span>
+      Gold (+{goldPerSecond}/s): {goldRounded} <button onClick={updateGoldPerSecond}>Increase</button>
+    </span>
   )
 }
 
 GoldDisplay.propTypes = {
   // connect
   gold: PropTypes.number,
+  goldPerSecond: PropTypes.number,
+  actions: PropTypes.objectOf(PropTypes.func),
+
+  // withHandlers
+  updateGoldPerSecond: PropTypes.func,
 };
 
 function mapStateToProps(state) {
   return {
-    gold: selectPlayerGold(state),
+    gold: selectCurrentGold(state),
+    goldPerSecond: selectGoldPerSecond(state),
+  };
+}
+
+function mapActionsToProps(dispatch) {
+  return {
+    actions: bindActionCreators({
+      updateGold,
+    }, dispatch),
   };
 }
 
 const enhance = compose(
-  connect(mapStateToProps),
+  connect(mapStateToProps, mapActionsToProps),
+  withHandlers({
+    updateGoldPerSecond: ({ actions, goldPerSecond }) => () => {
+      actions.updateGold({ perSecond: goldPerSecond + 1 });
+    },
+  }),
 );
 
 export default enhance(GoldDisplay);

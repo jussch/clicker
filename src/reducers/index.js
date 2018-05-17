@@ -3,7 +3,9 @@
 */
 import { combineReducers } from 'redux-immutable';
 import player from './player';
+import resources from './resources';
 
 export default combineReducers({
   player,
+  resources,
 });
