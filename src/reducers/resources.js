@@ -12,6 +12,7 @@ import {
 export const initialState = Map({
   gold: new Resource(),
   wood: new Resource(),
+  food: new Resource(),
 });
 
 export default handleActions({
