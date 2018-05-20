@@ -13,3 +13,11 @@ export function selectCurrentGold(state) {
 export function selectGoldPerSecond(state) {
   return selectResources(state).getIn(['gold', 'perSecond']);
 }
+
+export function selectResource(resourceName) {
+  return state => selectResources(state).get(resourceName);
+}
+
+export function selectResourceAmount(resourceName) {
+  return state => selectResources(state).getIn([resourceName, 'amount']);
+}
