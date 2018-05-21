@@ -5,6 +5,7 @@ import { compose } from 'recompose';
 import createModel from './extensions/createModel';
 
 export const Schema = {
+  name: null,
   amount: 0,
   perSecond: 0,
 };

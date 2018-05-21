@@ -6,7 +6,7 @@ import { Map } from 'immutable';
 import Building from '../models/Building';
 
 export const initialState = Map({
-  farms: new Building(),
+  farms: new Building({ name: 'farm' }),
 });
 
 export default handleActions({

@@ -10,9 +10,8 @@ import {
 } from '../actions/ResourceActions';
 
 export const initialState = Map({
-  gold: new Resource(),
-  wood: new Resource(),
-  food: new Resource(),
+  gold: new Resource({ name: 'gold' }),
+  food: new Resource({ name: 'food' }),
 });
 
 export default handleActions({
