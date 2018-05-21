@@ -4,13 +4,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
-import { connect } from 'react-redux';
+import { connect, withHandlers } from 'react-redux';
 import { selectBuilding } from '../../../../selectors/BuildingSelectors';
 import CustomPropTypes from '../../../../CustomPropTypes';
+import CostDisplay from '../../../Resources/CostDisplay';
+import Button from '../../../Library/Button';
 
 function BuildingPanelItem(props) {
   const {
     building,
+    handleBuy,
   } = props;
 
   const buildingInfo = building.getBuildingInfo();
@@ -18,7 +21,17 @@ function BuildingPanelItem(props) {
 
   return (
     <div>
-      <span>{buildingInfo.displayName}</span>
+      <div>
+        <div>{buildingInfo.displayName}</div>
+        <CostDisplay cost={computedCost} />
+      </div>
+      <div>
+        <Button
+          success
+          label="Buy"
+          onClick={handleBuy}
+        />
+      </div>
     </div>
   );
 }
@@ -28,6 +41,9 @@ BuildingPanelItem.propTypes = {
 
   // connect
   building: CustomPropTypes.building,
+
+  // withHandlers
+  handleBuy: PropTypes.func,
 };
 
 function mapStateToProps(state, props) {
@@ -38,6 +54,11 @@ function mapStateToProps(state, props) {
 
 const enhance = compose(
   connect(mapStateToProps, null),
+  withHandlers({
+    handleBuy: () => () => {
+      console.log('Building bought!');
+    },
+  }),
 );
 
 export default enhance(BuildingPanelItem);

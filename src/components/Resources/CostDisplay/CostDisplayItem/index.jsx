@@ -12,18 +12,21 @@ import NumberDisplay from '../../../Library/NumberDisplay';
 function CostDisplayItem(props) {
   const {
     resource,
-    cost,
+    costValue,
   } = props;
+
+  const resourceInfo = resource.getResourceInfo();
 
   return (
     <span>
-      <NumberDisplay value={cost} />
+      <NumberDisplay value={costValue} />
+      <span>{resourceInfo.displayName}</span>
     </span>
   );
 }
 
 CostDisplayItem.propTypes = {
-  cost: PropTypes.number.isRequired,
+  costValue: PropTypes.number.isRequired,
   resourceName: PropTypes.string.isRequired,
 };
 

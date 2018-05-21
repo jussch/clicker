@@ -5,6 +5,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import ImmutablePropTypes from 'react-immutable-proptypes';
+import CostDisplayItem from './CostDisplayItem';
 
 function CostDisplay(props) {
   const {
@@ -12,9 +13,15 @@ function CostDisplay(props) {
   } = props;
 
   return (
-    <div>
-
-    </div>
+    <span>
+      {cost.toArray().map((costValue, costName) => (
+        <CostDisplayItem
+          key={costName}
+          resourceName={costName}
+          costValue={costValue}
+        />
+      ))}
+    </span>
   );
 }
 
