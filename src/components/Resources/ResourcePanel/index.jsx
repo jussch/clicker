@@ -5,7 +5,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import { connect } from 'react-redux';
-import ResourcePanelItem from '.W/ResourcePanelItem';
+import ResourcePanelItem from './ResourcePanelItem';
 import { ALL_RESOURCES } from '../../../constants/Resources';
 
 function ResourcePanel(props) {

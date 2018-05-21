@@ -10,6 +10,8 @@ import CustomPropTypes from '../../../../CustomPropTypes';
 import { ALL_RESOURCES_BY_NAME } from '../../../../constants/Resources';
 import NumberDisplay from '../../../Library/NumberDisplay';
 
+import styles from './resourcePanelItem.scss';
+
 function ResourcePanelItem(props) {
   const {
     resourceName,
@@ -19,10 +21,14 @@ function ResourcePanelItem(props) {
   const resourceInfo = ALL_RESOURCES_BY_NAME[resourceName];
 
   return (
-    <div>
-      <span>{resourceInfo.displayName}:</span>
-      <NumberDisplay value={resource.get('amount')} />
-      <span>(+<NumberDisplay value={resource.get('perSecond')} />/s)</span>
+    <div className={styles.item}>
+      <span className={styles.name}>
+        {resourceInfo.displayName}:
+      </span>
+      <NumberDisplay value={resource.get('amount')} className={styles.value} />
+      <span className={styles.rate}>
+        (+<NumberDisplay value={resource.get('perSecond')} />/s)
+      </span>
     </div>
   );
 }

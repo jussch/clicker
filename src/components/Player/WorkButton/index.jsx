@@ -9,7 +9,7 @@ import { bindActionCreators } from 'redux';
 import { addGold } from '../../../actions/ResourceActions';
 import Button from '../../Library/Button';
 
-const GOLD_ADD = 1;
+const GOLD_ADD = 100;
 
 function WorkButton(props) {
   const {
