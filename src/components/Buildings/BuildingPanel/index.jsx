@@ -15,7 +15,7 @@ function BuildingPanel(props) {
         {ALL_BUILDINGS.map(buildingInfo => (
           <BuildingPanelItem
             key={buildingInfo.name}
-            name={buildingInfo.name}
+            buildingName={buildingInfo.name}
           />
         ))}
       </div>

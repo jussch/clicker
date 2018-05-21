@@ -14,13 +14,13 @@ function CostDisplay(props) {
 
   return (
     <span>
-      {cost.toArray().map((costValue, costName) => (
+      {cost.map((costValue, costName) => (
         <CostDisplayItem
           key={costName}
           resourceName={costName}
           costValue={costValue}
         />
-      ))}
+      )).toArray()}
     </span>
   );
 }

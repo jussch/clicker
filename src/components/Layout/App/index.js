@@ -3,6 +3,7 @@ import { Provider } from 'react-redux';
 import createStore from '../../../store/index';
 import { getMainStore, setMainStore } from '../../../store/MainStore';
 import ResourcePanel from '../../Resources/ResourcePanel';
+import BuildingPanel from '../../Buildings/BuildingPanel';
 import WorkButton from '../../Player/WorkButton';
 import Header from '../Header';
 
@@ -43,12 +44,13 @@ class App extends Component {
       <Provider store={store}>
         <div className={styles.app}>
           <Header />
-          <p className={styles.appIntro}>
+          <div className={styles.appIntro}>
             <ResourcePanel />
-          </p>
-          <p className={styles.appIntro}>
+            <BuildingPanel />
+          </div>
+          <div className={styles.appIntro}>
             <WorkButton />
-          </p>
+          </div>
         </div>
       </Provider>
     );

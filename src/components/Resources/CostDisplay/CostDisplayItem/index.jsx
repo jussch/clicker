@@ -9,18 +9,23 @@ import classNames from 'classnames';
 import { selectResource } from '../../../../selectors/ResourceSelectors';
 import NumberDisplay from '../../../Library/NumberDisplay';
 
+import styles from './costDisplayItem.scss';
+
 function CostDisplayItem(props) {
   const {
     resource,
     costValue,
   } = props;
 
+  console.log('props.resourceName:', props.resourceName);
   const resourceInfo = resource.getResourceInfo();
 
   return (
-    <span>
-      <NumberDisplay value={costValue} />
-      <span>{resourceInfo.displayName}</span>
+    <span className={styles.item}>
+      <NumberDisplay className={styles.value} value={costValue} />
+      <span className={styles.name}>
+        {` ${resourceInfo.displayName}`}
+      </span>
     </span>
   );
 }

@@ -3,8 +3,8 @@
  */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { compose } from 'recompose';
-import { connect, withHandlers } from 'react-redux';
+import { compose, withHandlers } from 'recompose';
+import { connect } from 'react-redux';
 import { selectBuilding } from '../../../../selectors/BuildingSelectors';
 import CustomPropTypes from '../../../../CustomPropTypes';
 import CostDisplay from '../../../Resources/CostDisplay';
