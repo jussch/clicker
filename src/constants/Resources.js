@@ -19,3 +19,4 @@ export const ALL_RESOURCES = [
 ];
 
 export const ALL_RESOURCES_BY_NAME = mapKeys(ALL_RESOURCES, ({ name }) => name);
+

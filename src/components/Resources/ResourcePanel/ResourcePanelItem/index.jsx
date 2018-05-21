@@ -7,11 +7,22 @@ import { compose } from 'recompose';
 import { connect } from 'react-redux';
 import { selectResource } from '../../../../selectors/ResourceSelectors';
 import CustomPropTypes from '../../../../CustomPropTypes';
+import { ALL_RESOURCES_BY_NAME } from '../../../../constants/Resources';
+import NumberDisplay from '../../../Library/NumberDisplay';
 
 function ResourcePanelItem(props) {
+  const {
+    resourceName,
+    resource,
+  } = props;
+
+  const resourceInfo = ALL_RESOURCES_BY_NAME[resourceName];
+
   return (
     <div>
-      <span></span>
+      <span>{resourceInfo.displayName}:</span>
+      <NumberDisplay value={resource.get('amount')} />
+      <span>(+<NumberDisplay value={resource.get('perSecond')} />/s)</span>
     </div>
   );
 }
@@ -30,7 +41,7 @@ function mapStateToProps(state, props) {
 }
 
 const enhance = compose(
-  connect(mapStateToProps)
+  connect(mapStateToProps, null)
 );
 
 export default enhance(ResourcePanelItem);

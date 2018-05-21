@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import createStore from '../../../store/index';
 import { getMainStore, setMainStore } from '../../../store/MainStore';
-import GoldDisplay from '../../Player/GoldDisplay';
+import ResourcePanel from '../../Resources/ResourcePanel';
 import WorkButton from '../../Player/WorkButton';
 import Header from '../Header';
 
@@ -44,7 +44,7 @@ class App extends Component {
         <div className={styles.app}>
           <Header />
           <p className={styles.appIntro}>
-            <GoldDisplay />
+            <ResourcePanel />
           </p>
           <p className={styles.appIntro}>
             <WorkButton />
