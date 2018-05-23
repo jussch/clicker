@@ -38,4 +38,21 @@ export default class Building extends enhance(createModel(BuildingSchema)) {
 
     return this._computedCost;
   }
+
+  getQuantityCost(number) {
+    if (number === 1) return this.getComputedCost();
+
+    const buildingInfo = this.getBuildingInfo();
+    const quantity = this.get('quantity');
+    const baseCost = Map(buildingInfo.baseCost);
+
+    let totalCost = Map();
+    for (let i = 0; i < number; i += 1) {
+      const indexQuantity = quantity + i;
+      const indexCost = baseCost.map(cost => cost * (buildingInfo.costMod ** indexQuantity));
+      totalCost = indexCost.map((cost, name) => cost + (totalCost.get(name) || 0));
+    }
+
+    return totalCost;
+  }
 }

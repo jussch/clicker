@@ -4,9 +4,11 @@
 import { handleActions } from 'redux-actions';
 import { Map } from 'immutable';
 import Resource from '../models/Resource';
+import { COMPLETE_TRANSACTION } from '../actions/TransactionActions';
 import {
   UPDATE_RESOURCE,
-  PROGRESS_RESOURCES, ADD_RESOURCE,
+  PROGRESS_RESOURCES,
+  ADD_RESOURCE,
 } from '../actions/ResourceActions';
 
 export const initialState = Map({
@@ -30,5 +32,16 @@ export default handleActions({
     return state.map(resource => (
       resource.update('amount', amount => resource.get('perSecond') * deltaTime + amount)
     ));
+  },
+
+  // Transactions
+  [COMPLETE_TRANSACTION](state, action) {
+    const { resources } = action.payload;
+    return state.map((resource) => {
+      const cost = resources[resource.get('name')];
+      if (!cost || cost <= 0) return resource;
+
+      return resource.update('amount', amount => amount - cost);
+    });
   },
 }, initialState)
