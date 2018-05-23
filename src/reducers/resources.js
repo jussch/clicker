@@ -3,7 +3,9 @@
  */
 import { handleActions } from 'redux-actions';
 import { Map } from 'immutable';
+import fromPairs from 'lodash/fromPairs';
 import Resource from '../models/Resource';
+import { ALL_RESOURCES } from '../constants/Resources';
 import { COMPLETE_TRANSACTION } from '../actions/TransactionActions';
 import {
   UPDATE_RESOURCE,
@@ -12,10 +14,9 @@ import {
   SET_RESOURCE_RATES,
 } from '../actions/ResourceActions';
 
-export const initialState = Map({
-  gold: new Resource({ name: 'gold' }),
-  food: new Resource({ name: 'food' }),
-});
+export const initialState = Map(fromPairs(ALL_RESOURCES.map(resourceInfo => (
+  [resourceInfo.name, new Resource({ name: resourceInfo.name })]
+))));
 
 export default handleActions({
   [UPDATE_RESOURCE](state, action) {

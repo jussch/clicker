@@ -3,12 +3,14 @@
  */
 import { handleActions } from 'redux-actions';
 import { Map } from 'immutable';
+import fromPairs from 'lodash/fromPairs';
+import { ALL_BUILDINGS } from '../constants/Buildings';
 import Building from '../models/Building';
 import { COMPLETE_TRANSACTION } from '../actions/TransactionActions';
 
-export const initialState = Map({
-  farm: new Building({ name: 'farm' }),
-});
+export const initialState = Map(fromPairs(ALL_BUILDINGS.map(buildingInfo => (
+  [buildingInfo.name, new Building({ name: buildingInfo.name })]
+))));
 
 export default handleActions({
   // Transactions

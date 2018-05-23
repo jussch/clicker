@@ -1,6 +1,23 @@
+@import '../../../../variables';
 
 .item {
+  padding: 2px 7px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-right: 5px;
+  display: inline-block;
+}
 
+.hasEnough {
+  border-color: $success-color;
+  color: $success-color;
+  background-color: rgba($success-color, 0.1);
+}
+
+.notEnough {
+  border-color: $danger-color;
+  color: $danger-color;
+  background-color: rgba($danger-color, 0.1);
 }
 
 .value {

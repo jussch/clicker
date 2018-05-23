@@ -18,9 +18,23 @@ function CostDisplayItem(props) {
   } = props;
 
   const resourceInfo = resource.getResourceInfo();
+  const amount = resource.get('amount');
+
+  const notEnough = costValue > amount;
+  const hasEnough = costValue <= amount;
+
+  const itemClass = classNames(styles.item, {
+    [styles.hasEnough]: hasEnough,
+    [styles.notEnough]: notEnough,
+  });
 
   return (
-    <span className={styles.item}>
+    <span className={itemClass}>
+      {notEnough && (
+        <span>
+          <NumberDisplay value={amount} />{' / '}
+        </span>
+      )}
       <NumberDisplay className={styles.value} value={costValue} />
       <span className={styles.name}>
         {` ${resourceInfo.displayName}`}
