@@ -9,6 +9,7 @@ import {
   UPDATE_RESOURCE,
   PROGRESS_RESOURCES,
   ADD_RESOURCE,
+  SET_RESOURCE_RATES,
 } from '../actions/ResourceActions';
 
 export const initialState = Map({
@@ -32,6 +33,16 @@ export default handleActions({
     return state.map(resource => (
       resource.update('amount', amount => resource.get('perSecond') * deltaTime + amount)
     ));
+  },
+
+  [SET_RESOURCE_RATES](state, action) {
+    const resourceRates = Map(action.payload);
+    return state.map((resource) => {
+      const resourceRate = resourceRates.get(resource.get('name'));
+      if (resourceRate == null) return resource;
+
+      return resource.set('perSecond', resourceRate);
+    });
   },
 
   // Transactions

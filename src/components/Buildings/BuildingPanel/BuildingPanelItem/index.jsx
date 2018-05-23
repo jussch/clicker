@@ -3,12 +3,15 @@
  */
 import React from 'react';
 import PropTypes from 'prop-types';
+import { bindActionCreators } from 'redux';
 import { compose, withHandlers } from 'recompose';
 import { connect } from 'react-redux';
 import { selectBuilding } from '../../../../selectors/BuildingSelectors';
 import CustomPropTypes from '../../../../CustomPropTypes';
 import CostDisplay from '../../../Resources/CostDisplay';
+import NumberDisplay from '../../../Library/NumberDisplay';
 import Button from '../../../Library/Button';
+import { makeTransaction } from '../../../../actions/TransactionActions';
 
 function BuildingPanelItem(props) {
   const {
@@ -22,7 +25,9 @@ function BuildingPanelItem(props) {
   return (
     <div>
       <div>
-        <div>{buildingInfo.displayName}</div>
+        <div>
+          {buildingInfo.displayName}: <NumberDisplay value={building.get('quantity')} />
+        </div>
         <CostDisplay cost={computedCost} />
       </div>
       <div>
@@ -41,6 +46,7 @@ BuildingPanelItem.propTypes = {
 
   // connect
   building: CustomPropTypes.building,
+  actions: PropTypes.objectOf(PropTypes.func),
 
   // withHandlers
   handleBuy: PropTypes.func,
@@ -52,11 +58,19 @@ function mapStateToProps(state, props) {
   };
 }
 
+function mapActionsToProps(dispatch) {
+  return {
+    actions: bindActionCreators({
+      makeTransaction,
+    }, dispatch),
+  };
+}
+
 const enhance = compose(
-  connect(mapStateToProps, null),
+  connect(mapStateToProps, mapActionsToProps),
   withHandlers({
-    handleBuy: () => () => {
-      console.log('Building bought!');
+    handleBuy: ({ actions, buildingName }) => () => {
+      actions.makeTransaction({ buildings: { [buildingName]: 1 } });
     },
   }),
 );

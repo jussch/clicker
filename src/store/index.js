@@ -4,6 +4,8 @@
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import rootReducer from '../reducers';
+import processTransactions from '../middleware/processTransactions';
+import recalculateResourceRate from '../middleware/recalculateResourceRate';
 
 export default function configureStore(initialState) {
   const create = window.devToolsExtension ?
@@ -12,6 +14,8 @@ export default function configureStore(initialState) {
 
   const createStoreWithMiddleware = applyMiddleware(
     thunk,
+    processTransactions,
+    recalculateResourceRate,
   )(create);
 
   const store = createStoreWithMiddleware(rootReducer, initialState);

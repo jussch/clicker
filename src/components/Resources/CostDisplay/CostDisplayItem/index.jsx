@@ -17,7 +17,6 @@ function CostDisplayItem(props) {
     costValue,
   } = props;
 
-  console.log('props.resourceName:', props.resourceName);
   const resourceInfo = resource.getResourceInfo();
 
   return (

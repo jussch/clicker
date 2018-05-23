@@ -55,4 +55,15 @@ export default class Building extends enhance(createModel(BuildingSchema)) {
 
     return totalCost;
   }
+
+  getComputedResources() {
+    if (this._computedResources) return this._computedResources;
+
+    const buildingInfo = this.getBuildingInfo();
+    const quantity = this.get('quantity');
+    const baseResources = Map(buildingInfo.baseResources);
+    this._computedResources = baseResources.map(value => value * quantity);
+
+    return this._computedResources;
+  }
 }

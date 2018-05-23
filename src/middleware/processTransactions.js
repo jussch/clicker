@@ -2,6 +2,7 @@
  * Created by Justin on 5/22/2018.
  */
 import { Map } from 'immutable';
+import addMaps from '../utilities/immutable/addMaps';
 import { selectBuildings } from '../selectors/BuildingSelectors';
 import { selectResources } from '../selectors/ResourceSelectors';
 import { ALL_BUILDINGS } from '../constants/Buildings';
@@ -34,7 +35,7 @@ export default function processTransactions({ getState, dispatch }) {
         if (!purchaseQuantity) return;
 
         const currentBuilding = buildings.get(name);
-        totalCost = addCosts(totalCost, currentBuilding.getQuantityCost(purchaseQuantity));
+        totalCost = addMaps(totalCost, currentBuilding.getQuantityCost(purchaseQuantity));
       });
 
       // Check resources to make sure purchase is possible.
@@ -50,13 +51,6 @@ export default function processTransactions({ getState, dispatch }) {
 
     return returnValue;
   };
-}
-
-function addCosts(cost1, cost2) {
-  return cost1.mergeWith(
-    (oldVal, newVal) => oldVal + newVal,
-    cost2,
-  );
 }
 
 function isValidPurchase(cost, resources) {

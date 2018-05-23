@@ -45,7 +45,7 @@ export default function beautifyNumber(number, options = {}) {
   } = options;
 
   const position = Math.floor(Math.log10(number) / 3);
-  if (position === 0 || number <= 0) return number.toFixed(0);
+  if (position <= 0 || number <= 0) return number.toFixed(0);
 
   const adjustment = 10 ** (position * 3);
   const shortNum = number / adjustment;
