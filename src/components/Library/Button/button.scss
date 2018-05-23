@@ -13,6 +13,15 @@
   &:hover {
     background-color: #eee;
   }
+
+  &:disabled,
+  &:disabled:hover,
+  &:disabled:active {
+    cursor: auto;
+    color: #888;
+    background-color: #ddd;
+    border-color: #aaa;
+  }
 }
 
 .primary {

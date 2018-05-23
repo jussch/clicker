@@ -6,7 +6,9 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { compose, withHandlers } from 'recompose';
 import { connect } from 'react-redux';
+import pluralize from 'pluralize';
 import { selectBuilding } from '../../../../selectors/BuildingSelectors';
+import { selectIsValidCost } from '../../../../selectors/ResourceSelectors';
 import CustomPropTypes from '../../../../CustomPropTypes';
 import CostDisplay from '../../../Resources/CostDisplay';
 import NumberDisplay from '../../../Library/NumberDisplay';
@@ -16,6 +18,7 @@ import { makeTransaction } from '../../../../actions/TransactionActions';
 function BuildingPanelItem(props) {
   const {
     building,
+    isPurchasable,
     handleBuy,
   } = props;
 
@@ -26,13 +29,14 @@ function BuildingPanelItem(props) {
     <div>
       <div>
         <div>
-          {buildingInfo.displayName}: <NumberDisplay value={building.get('quantity')} />
+          {pluralize(buildingInfo.displayName)}: <NumberDisplay value={building.get('quantity')} />
         </div>
         <CostDisplay cost={computedCost} />
       </div>
       <div>
         <Button
           success
+          disabled={!isPurchasable}
           label="Buy"
           onClick={handleBuy}
         />
@@ -46,6 +50,7 @@ BuildingPanelItem.propTypes = {
 
   // connect
   building: CustomPropTypes.building,
+  isPurchasable: PropTypes.bool,
   actions: PropTypes.objectOf(PropTypes.func),
 
   // withHandlers
@@ -53,8 +58,11 @@ BuildingPanelItem.propTypes = {
 };
 
 function mapStateToProps(state, props) {
+  const building = selectBuilding(props.buildingName)(state);
+
   return {
-    building: selectBuilding(props.buildingName)(state),
+    building,
+    isPurchasable: selectIsValidCost(building.getComputedCost())(state),
   };
 }
 

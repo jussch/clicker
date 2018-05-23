@@ -3,6 +3,7 @@
  */
 import { Map } from 'immutable';
 import addMaps from '../utilities/immutable/addMaps';
+import isValidPurchase from '../utilities/resources/isValidPurchase';
 import { selectBuildings } from '../selectors/BuildingSelectors';
 import { selectResources } from '../selectors/ResourceSelectors';
 import { ALL_BUILDINGS } from '../constants/Buildings';
@@ -51,10 +52,4 @@ export default function processTransactions({ getState, dispatch }) {
 
     return returnValue;
   };
-}
-
-function isValidPurchase(cost, resources) {
-  return cost.every((resourceCost, resourceName) => (
-    resources.getIn([resourceName, 'amount']) >= resourceCost
-  ));
 }

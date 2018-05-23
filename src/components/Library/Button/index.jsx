@@ -14,6 +14,7 @@ export default function Button(props) {
     primary,
     accent,
     success,
+    disabled,
     ...otherProps
   } = props;
 
@@ -24,7 +25,7 @@ export default function Button(props) {
   });
 
   return (
-    <button {...otherProps} className={computedClass}>
+    <button {...otherProps} className={computedClass} disabled={disabled}>
       {label}
     </button>
   )
@@ -36,4 +37,5 @@ Button.propTypes = {
   primary: PropTypes.bool,
   accent: PropTypes.bool,
   success: PropTypes.bool,
+  disabled: PropTypes.bool,
 };
