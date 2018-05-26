@@ -22,7 +22,7 @@ export default class Upgrade extends enhance(createModel(UpgradeSchema)) {
   getComputedCost() {
     if (this._computedCost) return this._computedCost;
 
-    const upgradeInfo = this.getBuildingInfo();
+    const upgradeInfo = this.getUpgradeInfo();
     const level = this.get('level');
     this._computedCost = upgradeInfo.get('cost').computeCost(level);
 
@@ -32,7 +32,7 @@ export default class Upgrade extends enhance(createModel(UpgradeSchema)) {
   getQuantityCost(number) {
     if (number === 1) return this.getComputedCost();
 
-    const upgradeInfo = this.getBuildingInfo();
+    const upgradeInfo = this.getUpgradeInfo();
     const level = this.get('level');
     return upgradeInfo.get('cost').computeCost(level, number);
   }

@@ -4,6 +4,7 @@ import createStore from '../../../store/index';
 import { getMainStore, setMainStore } from '../../../store/MainStore';
 import ResourcePanel from '../../Resources/ResourcePanel';
 import BuildingPanel from '../../Buildings/BuildingPanel';
+import UpgradePanel from '../../Upgrades/UpgradePanel';
 import WorkButton from '../../Player/WorkButton';
 import Header from '../Header';
 
@@ -46,6 +47,7 @@ class App extends Component {
           <div className={styles.appIntro}>
             <ResourcePanel />
             <BuildingPanel />
+            <UpgradePanel />
           </div>
           <div className={styles.appIntro}>
             <WorkButton />

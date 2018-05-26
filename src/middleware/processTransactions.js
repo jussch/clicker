@@ -5,8 +5,10 @@ import { Map } from 'immutable';
 import addMaps from '../utilities/immutable/addMaps';
 import isValidPurchase from '../utilities/resources/isValidPurchase';
 import { selectBuildings } from '../selectors/BuildingSelectors';
+import { selectUpgrades } from '../selectors/UpgradeSelectors';
 import { selectResources } from '../selectors/ResourceSelectors';
 import { ALL_BUILDINGS } from '../constants/Buildings';
+import { ALL_UPGRADES } from '../constants/Upgrades';
 import {
   MAKE_TRANSACTION,
   completeTransaction,
@@ -19,10 +21,12 @@ export default function processTransactions({ getState, dispatch }) {
     if (action.type === MAKE_TRANSACTION) {
       const {
         buildings: requestedBuildings = {},
+        upgrades: requestedUpgrades = {},
       } = action.payload;
 
       const state = getState();
       const buildings = selectBuildings(state);
+      const upgrades = selectUpgrades(state);
 
       let totalCost = Map();
 
@@ -35,6 +39,17 @@ export default function processTransactions({ getState, dispatch }) {
 
         const currentBuilding = buildings.get(name);
         totalCost = addMaps(totalCost, currentBuilding.getQuantityCost(purchaseQuantity));
+      });
+
+      // Add Upgrade Prices
+      ALL_UPGRADES.forEach((upgradeInfo) => {
+        const name = upgradeInfo.get('name');
+
+        const purchaseQuantity = requestedUpgrades[name];
+        if (!purchaseQuantity) return;
+
+        const currentUpgrade = upgrades.get(name);
+        totalCost = addMaps(totalCost, currentUpgrade.getQuantityCost(purchaseQuantity));
       });
 
       // Check resources to make sure purchase is possible.

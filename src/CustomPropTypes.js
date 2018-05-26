@@ -6,10 +6,12 @@ import Building from './models/Building';
 import Cost from './models/Cost';
 import Player from './models/Player';
 import Resource from './models/Resource';
+import Upgrade from './models/Upgrade';
 
 export default {
   building: PropTypes.instanceOf(Building),
   cost: PropTypes.instanceOf(Cost),
   player: PropTypes.instanceOf(Player),
   resource: PropTypes.instanceOf(Resource),
+  upgrade: PropTypes.instanceOf(Upgrade),
 };

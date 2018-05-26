@@ -18,8 +18,6 @@ export default class Cost extends enhance(createModel(CostSchema)) {
   computeCost(startNum, quantity = 1) {
     const baseCost = this.get('baseCost');
     const costMod = this.get('costMod');
-    console.log('baseCost:', baseCost.toJS());
-    console.log('costMod:', costMod);
 
     let totalCost = Map();
     for (let i = 0; i < quantity; i += 1) {

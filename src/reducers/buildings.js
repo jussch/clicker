@@ -15,7 +15,7 @@ export const initialState = Map(fromPairs(ALL_BUILDINGS.map(buildingInfo => (
 export default handleActions({
   // Transactions
   [COMPLETE_TRANSACTION](state, action) {
-    const { buildings } = action.payload;
+    const { buildings = {} } = action.payload;
 
     return state.map((building) => {
       const addedQuantity = buildings[building.get('name')];
