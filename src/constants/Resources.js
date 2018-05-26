@@ -38,5 +38,4 @@ export const ALL_RESOURCES = [
   RESOURCE_BANANA,
 ];
 
-export const ALL_RESOURCES_BY_NAME = mapKeys(ALL_RESOURCES, ({ name }) => name);
 export const getResourceInfo = createNameMapper(ALL_RESOURCES, 'Resource');

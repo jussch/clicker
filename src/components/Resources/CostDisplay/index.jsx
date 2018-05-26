@@ -5,6 +5,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import ImmutablePropTypes from 'react-immutable-proptypes';
+import CustomPropTypes from '../../../CustomPropTypes';
 import CostDisplayItem from './CostDisplayItem';
 
 function CostDisplay(props) {
@@ -26,6 +27,7 @@ function CostDisplay(props) {
 }
 
 CostDisplay.propTypes = {
+  // cost: CustomPropTypes.cost.isRequired,
   cost: ImmutablePropTypes.map.isRequired,
 };
 

@@ -28,9 +28,7 @@ export default function processTransactions({ getState, dispatch }) {
 
       // Add Building Prices
       ALL_BUILDINGS.forEach((buildingInfo) => {
-        const {
-          name,
-        } = buildingInfo;
+        const name = buildingInfo.get('name');
 
         const purchaseQuantity = requestedBuildings[name];
         if (!purchaseQuantity) return;

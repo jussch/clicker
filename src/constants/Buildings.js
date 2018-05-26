@@ -65,5 +65,4 @@ export const ALL_BUILDINGS = [
   BUILDING_MINES,
 ];
 
-export const ALL_BUILDINGS_BY_NAME = mapKeys(ALL_BUILDINGS, ({ name }) => name);
 export const getBuildingInfo = createNameMapper(ALL_BUILDINGS, 'Building');

@@ -29,7 +29,7 @@ function BuildingPanelItem(props) {
     <div>
       <div>
         <div>
-          {pluralize(buildingInfo.displayName)}: <NumberDisplay value={building.get('quantity')} />
+          {pluralize(buildingInfo.get('displayName'))}: <NumberDisplay value={building.get('quantity')} />
         </div>
         <CostDisplay cost={computedCost} />
       </div>

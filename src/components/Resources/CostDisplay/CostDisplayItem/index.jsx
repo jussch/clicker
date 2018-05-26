@@ -37,7 +37,7 @@ function CostDisplayItem(props) {
       )}
       <NumberDisplay className={styles.value} value={costValue} />
       <span className={styles.name}>
-        {` ${resourceInfo.displayName}`}
+        {` ${resourceInfo.get('displayName')}`}
       </span>
     </span>
   );

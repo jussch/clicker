@@ -9,7 +9,7 @@ import Building from '../models/Building';
 import { COMPLETE_TRANSACTION } from '../actions/TransactionActions';
 
 export const initialState = Map(fromPairs(ALL_BUILDINGS.map(buildingInfo => (
-  [buildingInfo.name, new Building({ name: buildingInfo.name })]
+  [buildingInfo.get('name'), new Building({ name: buildingInfo.get('name') })]
 ))));
 
 export default handleActions({

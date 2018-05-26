@@ -4,14 +4,13 @@
 import mapKeys from 'lodash/mapKeys';
 
 export default function createNameMapper(allInfos, collectionName = 'Info') {
-  const infoByName = mapKeys(allInfos, ({ name }) => name);
+  const infoByName = mapKeys(allInfos, (infoModel) => infoModel.get('name'));
 
   return function nameMapper(name) {
-    const infoModel = infoByName[name];
-    if (infoModel == null) {
+    if (!infoByName.hasOwnProperty(name)) {
       throw new RangeError(`Invalid ${collectionName} name: "${name}".`);
     }
 
-    return infoModel;
+    return infoByName[name];
   };
 }

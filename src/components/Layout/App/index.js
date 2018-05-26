@@ -16,7 +16,6 @@ class App extends Component {
     super(props);
 
     let store = getMainStore();
-    console.log('store:', store);
     if (store == null) {
       store = createStore();
       setMainStore(store);

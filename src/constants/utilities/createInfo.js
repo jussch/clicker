@@ -3,10 +3,17 @@
  */
 import { fromJS } from 'immutable';
 import Cost from '../../models/Cost';
+import createModel from '../../models/extensions/createModel';
 
 export default function createInfo(baseInfo) {
+  let costProps = {};
+
+  if (baseInfo.cost != null) {
+    costProps = { cost: Cost.fromJS(baseInfo.cost) };
+  }
+
   return fromJS({
     ...baseInfo,
-    cost: new Cost(baseInfo.cost),
+    ...costProps,
   });
 }

@@ -29,5 +29,4 @@ export const ALL_UPGRADES = [
   UPGRADE_IRON_HOE,
 ];
 
-export const ALL_UPGRADES_BY_NAME = mapKeys(ALL_UPGRADES, ({ name }) => name);
 export const getUpgradeInfo = createNameMapper(ALL_UPGRADES, 'Upgrade');

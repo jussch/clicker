@@ -15,8 +15,8 @@ function ResourcePanel(props) {
       <div>
         {ALL_RESOURCES.map(resourceInfo => (
           <ResourcePanelItem
-            key={resourceInfo.name}
-            resourceName={resourceInfo.name}
+            key={resourceInfo.get('name')}
+            resourceName={resourceInfo.get('name')}
           />
         ))}
       </div>
