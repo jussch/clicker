@@ -45,9 +45,9 @@ export const UPGRADE_IRON_AXE = createInfo({
         resourceRate: {
           lumber: ValueAdjustment.addFixed(5),
         },
-      }
-    }
-  }
+      },
+    },
+  },
 });
 
 export const UPGRADE_IRON_PICKAXE = createInfo({

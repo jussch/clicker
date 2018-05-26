@@ -6,7 +6,7 @@ import { List } from 'immutable';
 import createModel from '../../models/extensions/createModel';
 
 const ValueAdjustmentSchema = {
-  rankPos: 0,
+  rankPos: 1,
   fixedAdd: 0,
   percentAdd: 0,
   percentTimes: 1,
@@ -55,8 +55,8 @@ export default class ValueAdjustment extends enhance(createModel(ValueAdjustment
 
   static sortByRank(valueAdjustments) {
     return valueAdjustments.reduce((currList, valueAdjustment) => (
-      currList.update(valueAdjustment.get('rankPos'), List(), otherAdjusts => (
-        otherAdjusts.push(valueAdjustment)
+      currList.update(valueAdjustment.get('rankPos'), otherAdjusts => (
+        (otherAdjusts || List()).push(valueAdjustment)
       ))
     ), List());
   }

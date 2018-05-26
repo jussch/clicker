@@ -3,6 +3,7 @@
  */
 import createInfo from './utilities/createInfo';
 import createNameMapper from './utilities/createNameMapper';
+import ValueAdjustment from './utilities/ValueAdjustment';
 
 export const BUILDING_FARM = createInfo({
   name: 'farm',
@@ -18,7 +19,17 @@ export const BUILDING_FARM = createInfo({
   },
   prerequisites: {
 
-  }
+  },
+
+  bonuses: {
+    buildings: {
+      farm: {
+        resourceRate: {
+          food: ValueAdjustment.addPercent(0.1).rank(0),
+        },
+      },
+    },
+  },
 });
 
 export const BUILDING_SAWMILL = createInfo({

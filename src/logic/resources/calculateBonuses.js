@@ -9,20 +9,29 @@ import ValueAdjustment from '../../constants/utilities/ValueAdjustment';
 export default function calculateBonuses(state) {
   let totalBonuses = Map();
   let bonusLocations = Set();
+  function addBonuses(bonuses, multiplier) {
+    bonuses.forEach(({ path, valueAdjustment }) => {
+      bonusLocations = bonusLocations.add(path.join('.'));
+      totalBonuses = totalBonuses.updateIn(path, List(), bonusesList => (
+        bonusesList.push(valueAdjustment.times(multiplier))
+      ))
+    });
+  }
 
   const upgrades = selectUpgrades(state);
   upgrades.forEach((upgrade) => {
     const level = upgrade.get('level');
     const upgradeInfo = upgrade.getUpgradeInfo();
     const upgradeBonuses = getAllValueAdjustments(upgradeInfo);
-    console.log(`upgradeBonuses at ${upgrade.get('name')}:`, upgradeBonuses);
+    addBonuses(upgradeBonuses, level);
+  });
 
-    upgradeBonuses.forEach(({ path, valueAdjustment }) => {
-      bonusLocations = bonusLocations.add(path.join('.'));
-      totalBonuses = totalBonuses.updateIn(path, List(), bonusesList => (
-        bonusesList.push(valueAdjustment.times(level))
-      ))
-    });
+  const buildings = selectBuildings(state);
+  buildings.forEach((building) => {
+    const quantity = building.get('quantity');
+    const buildingInfo = building.getBuildingInfo();
+    const buildingBonuses = getAllValueAdjustments(buildingInfo);
+    addBonuses(buildingBonuses, quantity);
   });
 
   const allPaths = bonusLocations.toArray().map(pathString => pathString.split('.'));
@@ -45,6 +54,8 @@ function getAllValueAdjustments(infoModel) {
 
     return foundPaths;
   }
+
+  if (!infoModel.has('bonuses')) return [];
 
   return search(infoModel.get('bonuses'));
 }

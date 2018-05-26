@@ -11,10 +11,9 @@ export default function computeRate(state) {
   const buildings = selectBuildings(state);
 
   const allBonuses = calculateBonuses(state);
-  console.log('allBonuses:', allBonuses.toJS());
 
   const buildingsRate = buildings.reduce((rate, building) => {
-    const computedRate = building.getComputedResources().map((rate, resourceName) => {
+    const computedRate = building.getComputedResources((rate, resourceName) => {
       const bonusPath = ['buildings', building.get('name'), 'resourceRate', resourceName];
       if (!allBonuses.hasIn(bonusPath)) return rate;
       const rankedBonuses = allBonuses.getIn(bonusPath);
