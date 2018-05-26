@@ -1,7 +1,6 @@
 /**
  * Created by Justin on 5/19/2018.
  */
-import mapKeys from 'lodash/mapKeys';
 import createInfo from './utilities/createInfo';
 import createNameMapper from './utilities/createNameMapper';
 

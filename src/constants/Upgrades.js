@@ -1,9 +1,9 @@
 /**
  * Created by Justin on 5/23/2018.
  */
-import mapKeys from 'lodash/mapKeys';
 import createInfo from './utilities/createInfo';
 import createNameMapper from './utilities/createNameMapper';
+import ValueAdjustment from './utilities/ValueAdjustment';
 
 export const UPGRADE_IRON_HOE = createInfo({
   name: 'ironHoe',
@@ -19,7 +19,9 @@ export const UPGRADE_IRON_HOE = createInfo({
   bonus: {
     buildings: {
       farm: {
-        resourceRate: 2,
+        resourceRate: {
+          food: ValueAdjustment.addPercent(25),
+        },
       }
     }
   }
