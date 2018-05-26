@@ -2,31 +2,33 @@
  * Created by Justin on 5/19/2018.
  */
 import mapKeys from 'lodash/mapKeys';
+import createInfo from './utilities/createInfo';
+import createNameMapper from './utilities/createNameMapper';
 
-export const RESOURCE_GOLD = {
+export const RESOURCE_GOLD = createInfo({
   name: 'gold',
   displayName: 'Gold',
-};
+});
 
-export const RESOURCE_FOOD = {
+export const RESOURCE_FOOD = createInfo({
   name: 'food',
   displayName: 'Food',
-};
+});
 
-export const RESOURCE_LUMBER = {
+export const RESOURCE_LUMBER = createInfo({
   name: 'lumber',
   displayName: 'Lumber',
-};
+});
 
-export const RESOURCE_METAL = {
+export const RESOURCE_METAL = createInfo({
   name: 'metal',
   displayName: 'Metal',
-};
+});
 
-export const RESOURCE_BANANA = {
+export const RESOURCE_BANANA = createInfo({
   name: 'banana',
   displayName: 'Bananas',
-};
+});
 
 export const ALL_RESOURCES = [
   RESOURCE_GOLD,
@@ -37,4 +39,4 @@ export const ALL_RESOURCES = [
 ];
 
 export const ALL_RESOURCES_BY_NAME = mapKeys(ALL_RESOURCES, ({ name }) => name);
-
+export const getResourceInfo = createNameMapper(ALL_RESOURCES, 'Resource');

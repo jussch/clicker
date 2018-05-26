@@ -3,7 +3,7 @@
  */
 import { compose } from 'recompose';
 import createModel from './extensions/createModel';
-import { ALL_RESOURCES_BY_NAME } from '../constants/Resources';
+import { getResourceInfo } from '../constants/Resources';
 
 export const Schema = {
   name: null,
@@ -17,6 +17,6 @@ const enhance = compose(
 
 export default class Resource extends enhance(createModel(Schema)) {
   getResourceInfo() {
-    return ALL_RESOURCES_BY_NAME[this.get('name')];
+    return getResourceInfo(this.get('name'));
   }
 }

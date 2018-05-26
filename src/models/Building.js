@@ -2,9 +2,8 @@
  * Created by Justin on 5/19/2018.
  */
 import { compose } from 'recompose';
-import { Map } from 'immutable';
 import createModel from './extensions/createModel';
-import { ALL_BUILDINGS_BY_NAME } from '../constants/Buildings';
+import { getBuildingInfo } from '../constants/Buildings';
 
 const BuildingSchema = {
   name: null,
@@ -16,25 +15,16 @@ const enhance = compose(
 );
 
 export default class Building extends enhance(createModel(BuildingSchema)) {
-  validateName() {
-    const name = this.get('name');
-    if (name == null || ALL_BUILDINGS_BY_NAME[name] == null) {
-      throw new RangeError(`Invalid building name: "${name}".`);
-    }
-  }
-
   getBuildingInfo() {
-    return ALL_BUILDINGS_BY_NAME[this.get('name')];
+    return getBuildingInfo(this.get('name'));
   }
 
   getComputedCost() {
     if (this._computedCost) return this._computedCost;
-    this.validateName();
 
     const buildingInfo = this.getBuildingInfo();
     const quantity = this.get('quantity');
-    const baseCost = Map(buildingInfo.baseCost);
-    this._computedCost = baseCost.map(cost => cost * (buildingInfo.costMod ** quantity));
+    this._computedCost = buildingInfo.get('cost').computeCost(quantity);
 
     return this._computedCost;
   }
@@ -44,16 +34,7 @@ export default class Building extends enhance(createModel(BuildingSchema)) {
 
     const buildingInfo = this.getBuildingInfo();
     const quantity = this.get('quantity');
-    const baseCost = Map(buildingInfo.baseCost);
-
-    let totalCost = Map();
-    for (let i = 0; i < number; i += 1) {
-      const indexQuantity = quantity + i;
-      const indexCost = baseCost.map(cost => cost * (buildingInfo.costMod ** indexQuantity));
-      totalCost = indexCost.map((cost, name) => cost + (totalCost.get(name) || 0));
-    }
-
-    return totalCost;
+    return buildingInfo.get('cost').computeCost(quantity, number);
   }
 
   getComputedResources() {
@@ -61,7 +42,7 @@ export default class Building extends enhance(createModel(BuildingSchema)) {
 
     const buildingInfo = this.getBuildingInfo();
     const quantity = this.get('quantity');
-    const baseResources = Map(buildingInfo.baseResources);
+    const baseResources = buildingInfo.get('baseResources');
     this._computedResources = baseResources.map(value => value * quantity);
 
     return this._computedResources;

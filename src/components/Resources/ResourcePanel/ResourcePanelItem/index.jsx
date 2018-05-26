@@ -7,23 +7,21 @@ import { compose } from 'recompose';
 import { connect } from 'react-redux';
 import { selectResource } from '../../../../selectors/ResourceSelectors';
 import CustomPropTypes from '../../../../CustomPropTypes';
-import { ALL_RESOURCES_BY_NAME } from '../../../../constants/Resources';
 import NumberDisplay from '../../../Library/NumberDisplay';
 
 import styles from './resourcePanelItem.scss';
 
 function ResourcePanelItem(props) {
   const {
-    resourceName,
     resource,
   } = props;
 
-  const resourceInfo = ALL_RESOURCES_BY_NAME[resourceName];
+  const resourceInfo = resource.getResourceInfo();
 
   return (
     <div className={styles.item}>
       <span className={styles.name}>
-        {resourceInfo.displayName}:
+        {resourceInfo.get('displayName')}:
       </span>
       <NumberDisplay value={resource.get('amount')} className={styles.value} />
       <span className={styles.rate}>

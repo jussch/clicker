@@ -16,7 +16,7 @@ const enhance = compose(
 );
 
 export default class Cost extends enhance(createModel(CostSchema)) {
-  computeCost(startNum, quantity) {
+  computeCost(startNum, quantity = 1) {
     const baseCost = this.get('baseCost');
     const costMod = this.get('costMod');
 
