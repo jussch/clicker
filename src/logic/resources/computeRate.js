@@ -4,13 +4,26 @@
 import { Map } from 'immutable';
 import addMaps from '../../utilities/immutable/addMaps';
 import { selectBuildings } from '../../selectors/BuildingSelectors';
+import calculateBonuses from './calculateBonuses';
+import ValueAdjustment from '../../constants/utilities/ValueAdjustment';
 
 export default function computeRate(state) {
   const buildings = selectBuildings(state);
 
-  const buildingsRate = buildings.reduce((rate, building) => (
-    addMaps(rate, building.getComputedResources())
-  ), Map());
+  const allBonuses = calculateBonuses(state);
+  console.log('allBonuses:', allBonuses.toJS());
+
+  const buildingsRate = buildings.reduce((rate, building) => {
+    const computedRate = building.getComputedResources().map((rate, resourceName) => {
+      const bonusPath = ['buildings', building.get('name'), 'resourceRate', resourceName];
+      if (!allBonuses.hasIn(bonusPath)) return rate;
+      const rankedBonuses = allBonuses.getIn(bonusPath);
+
+      return ValueAdjustment.adjustValueByRankedAdjustments(rate, rankedBonuses);
+    });
+
+    return addMaps(rate, computedRate);
+  }, Map());
 
   return buildingsRate;
 }

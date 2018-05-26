@@ -27,7 +27,7 @@ export const BUILDING_SAWMILL = createInfo({
   cost: {
     baseCost: {
       gold: 10,
-      food: 50,
+      food: 10,
     },
     costMod: 1.3,
   },
@@ -45,8 +45,8 @@ export const BUILDING_MINES = createInfo({
   cost: {
     baseCost: {
       gold: 10,
-      food: 50,
-      lumber: 100,
+      food: 10,
+      lumber: 10,
     },
     costMod: 1.3,
   },

@@ -12,15 +12,60 @@ export const UPGRADE_IRON_HOE = createInfo({
   cost: {
     costMod: 3,
     baseCost: {
-      metal: 200,
+      metal: 10,
     },
   },
 
-  bonus: {
+  bonuses: {
     buildings: {
       farm: {
         resourceRate: {
-          food: ValueAdjustment.addPercent(25),
+          food: ValueAdjustment.addPercent(0.25),
+        },
+      }
+    }
+  }
+});
+
+export const UPGRADE_IRON_AXE = createInfo({
+  name: 'ironAxe',
+  displayName: 'Iron Axe',
+  maxLevel: 10,
+  cost: {
+    costMod: 3,
+    baseCost: {
+      lumber: 10,
+      metal: 10,
+    },
+  },
+
+  bonuses: {
+    buildings: {
+      sawmill: {
+        resourceRate: {
+          lumber: ValueAdjustment.addFixed(5),
+        },
+      }
+    }
+  }
+});
+
+export const UPGRADE_IRON_PICKAXE = createInfo({
+  name: 'ironPickaxe',
+  displayName: 'Iron Pickaxe',
+  maxLevel: 10,
+  cost: {
+    costMod: 3,
+    baseCost: {
+      metal: 100,
+    },
+  },
+
+  bonuses: {
+    buildings: {
+      mines: {
+        resourceRate: {
+          metal: ValueAdjustment.timesPercent(1.25),
         },
       }
     }
@@ -29,6 +74,8 @@ export const UPGRADE_IRON_HOE = createInfo({
 
 export const ALL_UPGRADES = [
   UPGRADE_IRON_HOE,
+  UPGRADE_IRON_AXE,
+  UPGRADE_IRON_PICKAXE,
 ];
 
 export const getUpgradeInfo = createNameMapper(ALL_UPGRADES, 'Upgrade');
