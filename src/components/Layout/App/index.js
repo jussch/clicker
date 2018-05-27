@@ -6,7 +6,9 @@ import ResourcePanel from '../../Resources/ResourcePanel';
 import BuildingPanel from '../../Buildings/BuildingPanel';
 import UpgradePanel from '../../Upgrades/UpgradePanel';
 import WorkButton from '../../Player/WorkButton';
+import BattleInitiator from '../../Battle/BattleInitiator';
 import Header from '../Header';
+import BattleLayout from '../../Battle/BattleLayout';
 
 import styles from './App.scss';
 
@@ -51,6 +53,8 @@ class App extends Component {
           </div>
           <div className={styles.appIntro}>
             <WorkButton />
+            <BattleInitiator />
+            <BattleLayout />
           </div>
         </div>
       </Provider>
