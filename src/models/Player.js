@@ -7,6 +7,8 @@ import applyBattler, { BATTLER_ATTRIBUTES } from './extensions/applyBattler';
 
 export const Schema = {
   ...BATTLER_ATTRIBUTES,
+  energy: 0,
+  maxEnergy: 100,
 };
 
 const enhance = compose(

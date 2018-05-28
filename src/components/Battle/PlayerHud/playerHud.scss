@@ -1,0 +1,19 @@
+@import '../../../variables';
+
+.normal {
+  border: 1px solid #ccc;
+  background: #fff;
+  border-radius: 5px;
+  padding: 0 20px 10px 20px;
+  width: 300px;
+}
+
+.header {
+  padding: 0 10px 10px 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+.data {
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}

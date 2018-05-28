@@ -6,11 +6,13 @@ import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import { connect } from 'react-redux';
 import PlayerHud from '../PlayerHud';
+import PlayerActions from '../PlayerActions';
 
 function BattleLayout(props) {
   return (
     <div>
       <PlayerHud />
+      <PlayerActions />
     </div>
   );
 }

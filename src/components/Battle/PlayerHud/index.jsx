@@ -9,16 +9,21 @@ import { selectPlayer } from '../../../selectors/PlayerSelectors';
 import CustomPropTypes from '../../../CustomPropTypes';
 import NumberDisplay from '../../Library/NumberDisplay'
 
+import styles from './playerHud.scss';
+
 function PlayerHud(props) {
   const {
     player,
   } = props;
 
   return (
-    <div>
-      <h4>Player</h4>
-      <div>
-        HP: <NumberDisplay value={player.get('hp')} />
+    <div className={styles.normal}>
+      <h4 className={styles.header}>Player</h4>
+      <div className={styles.data}>
+        Health: <NumberDisplay value={player.get('hp')} /> / <NumberDisplay value={player.get('maxHp')}/>
+      </div>
+      <div className={styles.data}>
+        Energy: <NumberDisplay value={player.get('energy')} /> / <NumberDisplay value={player.get('maxEnergy')}/>
       </div>
     </div>
   );

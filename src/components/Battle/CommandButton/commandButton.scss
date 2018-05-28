@@ -1,0 +1,45 @@
+@import '../../../variables';
+
+.button {
+  border: 1px solid #ccc;
+  width: 150px;
+  height: 200px;
+  color: #333;
+  position: relative;
+  background: #fff;
+}
+
+.content {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.header {
+  position: relative;
+  padding: 15px 0;
+}
+
+.name {
+  font-weight: inherit;
+}
+
+.cost {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  border: 1px solid darken($energy-color, 10%);
+  background-color: $energy-color;
+  line-height: 28px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  text-align: center;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.description {
+  color: #888;
+}
