@@ -44,8 +44,11 @@ export default function beautifyNumber(number, options = {}) {
     decimals = 1,
   } = options;
 
-  const position = Math.floor(Math.log10(number) / 3);
-  if (position <= 0 || number <= 0) return number.toFixed(0);
+  const digits = Math.floor(Math.log10(number)) + 1;
+  const position = Math.floor((digits - 1) / 3);
+
+  // Use 4 so that it still reads in the thousands.
+  if (number <= 0 || digits <= 4) return number.toFixed(0);
 
   const adjustment = 10 ** (position * 3);
   const shortNum = number / adjustment;

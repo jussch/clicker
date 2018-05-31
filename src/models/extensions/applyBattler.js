@@ -4,7 +4,7 @@
 
 export default function applyBattler(options = {}) {
   return (GivenClass) => {
-    return class Battler extends GivenClass {        
+    return class Battler extends GivenClass {
       applyDamage(damage) {
         return this.update('hp', hp => Math.min(hp - damage));
       }
@@ -19,6 +19,4 @@ export const BATTLER_ATTRIBUTES = {
   mp: 0,
   power: 0,
   defense: 0,
-  speed: 0,
-  actions: 1,
 };

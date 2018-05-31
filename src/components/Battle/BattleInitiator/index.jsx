@@ -9,6 +9,7 @@ import { List } from 'immutable';
 import { bindActionCreators } from 'redux';
 import { setupBattle } from '../../../actions/BattleActions';
 import Button from '../../Library/Button';
+import Enemy from '../../../models/Enemy';
 
 function BattleInitiator(props) {
   const {
@@ -46,7 +47,14 @@ const enhance = compose(
   withHandlers({
     handleStartBattle: ({ actions }) => () => {
       actions.setupBattle({
-        enemies: List(),
+        enemies: List([
+          Enemy.create({
+            name: 'Rat',
+            maxHp: 5,
+            power: 5,
+            defense: 5,
+          }),
+        ]),
         allies: List(),
       })
     },
