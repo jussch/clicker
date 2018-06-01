@@ -1,0 +1,35 @@
+@import '../../../variables';
+
+.wrapper {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 300px;
+}
+
+.name {
+  padding: 5px 10px;
+  border-bottom: 1px solid #ccc;
+  margin: 0;
+  color: #fff;
+  background: $primary-color-dark;
+}
+
+.data {
+  padding: 10px;
+}
+
+.dataRow {
+
+}
+
+.dataKey {
+
+}
+
+.dataValue {
+
+}
+
+.dataMax {
+
+}

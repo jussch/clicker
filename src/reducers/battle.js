@@ -3,13 +3,18 @@
 */
 import { handleActions } from 'redux-actions';
 import { Map, List } from 'immutable';
-import { SETUP_BATTLE } from '../actions/BattleActions';
+import {
+  SETUP_BATTLE,
+  PREPARE_ACTION,
+  APPLY_EFFECT,
+} from '../actions/BattleActions';
 
 export const initialState = Map({
   allies: List(),
   enemies: List(),
   phase: null,
   isActive: false,
+  queuedAction: null,
 });
 
 export default handleActions({
@@ -19,5 +24,13 @@ export default handleActions({
       .set('allies', allies)
       .set('enemies', enemies)
       .set('isActive', true);
+  },
+
+  [PREPARE_ACTION](state, action) {
+    return state;
+  },
+
+  [APPLY_EFFECT](state, action) {
+    return state;
   },
 }, initialState)

@@ -53,7 +53,7 @@ const enhance = compose(
             maxHp: 5,
             power: 5,
             defense: 5,
-          }),
+          }).resetState(),
         ]),
         allies: List(),
       })

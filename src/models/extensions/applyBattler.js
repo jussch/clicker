@@ -8,6 +8,12 @@ export default function applyBattler(options = {}) {
       applyDamage(damage) {
         return this.update('hp', hp => Math.min(hp - damage));
       }
+
+      resetState() {
+        return this
+          .set('hp', this.get('maxHp'))
+          .set('mp', this.get('maxMp'));
+      }
     };
   };
 }

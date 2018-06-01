@@ -7,12 +7,14 @@ import { compose } from 'recompose';
 import { connect } from 'react-redux';
 import PlayerHud from '../PlayerHud';
 import PlayerActions from '../PlayerActions';
+import EnemyTroopHud from '../EnemyTroopHud';
 
 function BattleLayout(props) {
   return (
     <div>
       <PlayerHud />
       <PlayerActions />
+      <EnemyTroopHud />
     </div>
   );
 }

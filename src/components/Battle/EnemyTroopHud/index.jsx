@@ -7,6 +7,7 @@ import { compose } from 'recompose';
 import { connect } from 'react-redux';
 import times from 'lodash/times';
 import { selectNumEnemies } from '../../../selectors/BattleSelectors';
+import EnemyHud from '../EnemyHud';
 
 function EnemyTroopHud(props) {
   const {
@@ -18,7 +19,10 @@ function EnemyTroopHud(props) {
       <h3>Enemies</h3>
       <div>
         {times(numEnemies, index => (
-          <div />
+          <EnemyHud
+            key={index}
+            enemyIndex={index}
+          />
         ))}
       </div>
     </div>
