@@ -27,10 +27,10 @@ export default handleActions({
   },
 
   [PREPARE_ACTION](state, action) {
-    return state;
+    return state.set('queuedAction', action.payload.action);
   },
 
   [APPLY_EFFECT](state, action) {
-    return state;
+    return state.set('queuedAction', null);
   },
 }, initialState)

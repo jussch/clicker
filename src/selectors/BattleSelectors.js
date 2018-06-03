@@ -17,3 +17,15 @@ export function selectNumEnemies(state) {
 export function selectEnemy(index) {
   return state => selectEnemies(state).get(index);
 }
+
+export function selectAllies(state) {
+  return selectBattleState(state).get('allies');
+}
+
+export function selectNumAllies(state) {
+  return selectAllies(state).size;
+}
+
+export function selectAlly(index) {
+  return state => selectAllies(state).get(index);
+}
