@@ -14,6 +14,7 @@ export default function Button(props) {
     primary,
     accent,
     success,
+    fullWidth,
     disabled,
     ...otherProps
   } = props;
@@ -22,6 +23,7 @@ export default function Button(props) {
     [styles.primary]: primary,
     [styles.accent]: accent,
     [styles.success]: success,
+    [styles.fullWidth]: fullWidth,
   });
 
   return (
@@ -37,5 +39,6 @@ Button.propTypes = {
   primary: PropTypes.bool,
   accent: PropTypes.bool,
   success: PropTypes.bool,
+  fullWidth: PropTypes.bool,
   disabled: PropTypes.bool,
 };

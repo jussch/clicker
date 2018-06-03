@@ -4,6 +4,8 @@
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import rootReducer from '../reducers';
+import actionLogger from '../middleware/actionLogger';
+import battleManager from '../middleware/battleManager';
 import processTransactions from '../middleware/processTransactions';
 import recalculateResourceRate from '../middleware/recalculateResourceRate';
 
@@ -14,6 +16,8 @@ export default function configureStore(initialState) {
 
   const createStoreWithMiddleware = applyMiddleware(
     thunk,
+    actionLogger,
+    battleManager,
     processTransactions,
     recalculateResourceRate,
   )(create);

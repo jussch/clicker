@@ -29,3 +29,7 @@ export function selectNumAllies(state) {
 export function selectAlly(index) {
   return state => selectAllies(state).get(index);
 }
+
+export function selectQueuedAction(state) {
+  return selectBattleState(state).get('queuedAction');
+}
