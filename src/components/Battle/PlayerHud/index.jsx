@@ -7,7 +7,8 @@ import { compose } from 'recompose';
 import { connect } from 'react-redux';
 import { selectPlayer } from '../../../selectors/PlayerSelectors';
 import CustomPropTypes from '../../../CustomPropTypes';
-import NumberDisplay from '../../Library/NumberDisplay'
+import NumberDisplay from '../../Library/NumberDisplay';
+import HpNumber from '../HpNumber';
 
 import styles from './playerHud.scss';
 
@@ -20,7 +21,9 @@ function PlayerHud(props) {
     <div className={styles.normal}>
       <h4 className={styles.header}>Player</h4>
       <div className={styles.data}>
-        Health: <NumberDisplay value={player.get('hp')} /> / <NumberDisplay value={player.get('maxHp')}/>
+        Health: <HpNumber value={player.get('hp')} max={player.get('maxHp')} />
+        {' / '}
+        <NumberDisplay value={player.get('maxHp')}/>
       </div>
       <div className={styles.data}>
         Energy: <NumberDisplay value={player.get('energy')} /> / <NumberDisplay value={player.get('maxEnergy')}/>

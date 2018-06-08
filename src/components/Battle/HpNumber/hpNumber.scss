@@ -1,0 +1,13 @@
+@import '../../../variables';
+
+.hpValue {
+  color: $success-color;
+
+  &.damaged {
+    color: $warning-color;
+  }
+
+  &.critical {
+    color: $danger-color;
+  }
+}

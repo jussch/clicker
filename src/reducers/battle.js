@@ -31,6 +31,13 @@ export default handleActions({
   },
 
   [APPLY_EFFECT](state, action) {
-    return state.set('queuedAction', null);
+    const { action: battleAction, user } = action.payload;
+    const effect = battleAction.generateEffect(user);
+
+    return state
+      .set('queuedAction', null)
+      .update('enemies', enemies => enemies.map(enemy => (
+        enemy.applyDamage(effect.get('damage') || 0)
+      )));
   },
 }, initialState)

@@ -6,12 +6,14 @@ import PropTypes from 'prop-types';
 import { compose, withHandlers } from 'recompose';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import classNames from 'classnames';
 import { selectEnemy, selectQueuedAction } from '../../../selectors/BattleSelectors';
 import NumberDisplay from '../../Library/NumberDisplay';
 import { selectTarget } from '../../../actions/BattleActions';
 import { AFF_ENEMY } from '../../../constants/BattleActions';
 import Button from '../../Library/Button';
 import CustomPropTypes from '../../../CustomPropTypes';
+import HpNumber from '../HpNumber';
 
 import styles from './enemyHud.scss';
 
@@ -22,13 +24,21 @@ function EnemyHud(props) {
     handleSelectTarget,
   } = props;
 
+  const isDead = enemy.isDead();
+  const isCritical = enemy.isCritical();
+  const isDamaged = enemy.isDamaged();
+
+  const nameClass = classNames(styles.name, {
+    [styles.dead]: isDead,
+  });
+
   return (
     <div className={styles.wrapper}>
-      <h4 className={styles.name}>{enemy.get('name')}</h4>
+      <h4 className={nameClass}>{enemy.get('name')} {isDead && '(Dead)'}</h4>
       <div className={styles.data}>
         <div className={styles.dataRow}>
           <span className={styles.dataKey}>HP: </span>
-          <NumberDisplay value={enemy.get('hp')} className={styles.dataValue} />
+          <HpNumber value={enemy.get('hp')} max={enemy.get('maxHp')} className={styles.dataValue} />
           {' / '}
           <NumberDisplay value={enemy.get('maxHp')} className={styles.dataMax}/>
         </div>

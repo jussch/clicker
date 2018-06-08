@@ -11,7 +11,7 @@ const BattleActionSchema = {
   scope: null,
   energyCost: 0,
   manaCost: 0,
-  effects: {},
+  effects: Map(),
 };
 
 const enhance = compose(
@@ -19,5 +19,7 @@ const enhance = compose(
 );
 
 export default class BattleAction extends enhance(createModel(BattleActionSchema)) {
-
+  generateEffect(user) {
+    return this.get('effects');
+  }
 }

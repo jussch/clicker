@@ -1,6 +1,7 @@
 /**
  * Created by Justin on 6/1/2018.
  */
+import { selectPlayer } from '../selectors/PlayerSelectors';
 import hasOneTarget from '../logic/battle/hasOneTarget';
 import {
   PREPARE_ACTION,
@@ -24,7 +25,8 @@ export default function battleManager({ getState, dispatch }) {
     if (action.type === INITIATE_ACTION) {
       const { action: battleAction } = action.payload;
       if (hasOneTarget(battleAction, state)) {
-        dispatch(applyEffect({
+        return dispatch(applyEffect({
+          user: selectPlayer(state),
           action: battleAction,
         }))
       }

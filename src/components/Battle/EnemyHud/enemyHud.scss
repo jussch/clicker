@@ -12,6 +12,9 @@
   margin: 0;
   color: #fff;
   background: $primary-color-dark;
+  &.dead {
+    background: $danger-color;
+  }
 }
 
 .data {
