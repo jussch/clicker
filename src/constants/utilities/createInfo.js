@@ -9,7 +9,7 @@ export default function createInfo(baseInfo) {
   let costProps = {};
 
   if (baseInfo.cost != null) {
-    costProps = { cost: Cost.fromJS(baseInfo.cost) };
+    costProps = { cost: Cost.createFromJS(baseInfo.cost) };
   }
 
   return fromJS({

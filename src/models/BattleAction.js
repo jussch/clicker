@@ -10,7 +10,7 @@ const BattleActionSchema = {
   subtype: null,
   scope: null,
   energyCost: 0,
-  manaCost: 0,
+  mpCost: 0,
   effects: Map(),
 };
 

@@ -31,13 +31,15 @@ export default handleActions({
   },
 
   [APPLY_EFFECT](state, action) {
-    const { action: battleAction, user } = action.payload;
+    const { action: battleAction, user, targetIds } = action.payload;
     const effect = battleAction.generateEffect(user);
 
     return state
       .set('queuedAction', null)
-      .update('enemies', enemies => enemies.map(enemy => (
-        enemy.applyDamage(effect.get('damage') || 0)
-      )));
+      .update('enemies', enemies => enemies.map(enemy => {
+        if (!targetIds.has(enemy.getId())) return enemy;
+
+        return enemy.applyEffect(effect);
+      }));
   },
 }, initialState)

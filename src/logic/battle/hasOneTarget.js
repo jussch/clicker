@@ -1,7 +1,6 @@
 /**
  * Created by Justin on 6/2/2018.
  */
-import { selectNumEnemies, selectNumAllies } from '../../selectors/BattleSelectors';
 import {
   TARGET_ALL_ALLIES,
   TARGET_ALL_ENEMIES,
@@ -9,8 +8,9 @@ import {
   TARGET_ENEMY,
   TARGET_SELF,
 } from '../../constants/BattleActions';
+import getTargetIds from './getTargetIds';
 
-export default function hasOneTarget(battleAction, state) {
+export default function hasOneTarget(battleAction, user, state) {
   const scope = battleAction.get('scope');
 
   if (
@@ -19,15 +19,10 @@ export default function hasOneTarget(battleAction, state) {
     scope === TARGET_SELF
   ) {
     return true;
-  } else if (scope === TARGET_ENEMY) {
-    const numEnemies = selectNumEnemies(state);
-    return numEnemies === 1;
-  } else if (scope === TARGET_ALLY) {
-    const numAllies = selectNumAllies(state);
-
-    // numAllies does not include self.
-    return numAllies === 0;
+  } else if (scope === TARGET_ENEMY || scope === TARGET_ALLY) {
+    const targets = getTargetIds(battleAction, user, state);
+    return targets.size <= 1
   }
 
-  throw new RangeError(`Invalid battleAction scope: "${scope}".`);
+  throw new RangeError(`Invalid battleAction scope: "${scope}".`)
 }

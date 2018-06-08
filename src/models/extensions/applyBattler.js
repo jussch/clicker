@@ -3,10 +3,18 @@
 */
 
 export default function applyBattler(options = {}) {
+  const {
+    affiliation,
+  } = options;
+
   return (GivenClass) => {
     return class Battler extends GivenClass {
       applyDamage(damage) {
         return this.update('hp', hp => Math.max(hp - damage, 0));
+      }
+
+      applyEffect(effect) {
+        return this.applyDamage(effect.get('damage') || 0);
       }
 
       isDead() {
@@ -33,6 +41,18 @@ export default function applyBattler(options = {}) {
         return this.set('block', 0);
       }
 
+      getAffiliation() {
+        return affiliation;
+      }
+
+      applyCost(battleAction) {
+        return this.update('mp', mp => clampValue(mp - battleAction.get('mpCost'), this.get('maxMp')))
+      }
+
+      canUseAction(battleAction) {
+        return this.get('mp') >= battleAction.get('mpCost');
+      }
+
       resetState() {
         return this
           .set('hp', this.get('maxHp'))
@@ -51,3 +71,7 @@ export const BATTLER_ATTRIBUTES = {
   power: 0,
   defense: 0,
 };
+
+export function clampValue(value, max) {
+  return Math.max(Math.min(value, max), 0);
+}

@@ -75,7 +75,7 @@ const enhance = compose(
   withHandlers({
     handleBasicAttack: ({ actions }) => () => {
       actions.initiateAction({
-        action: BattleAction.fromJS({
+        action: BattleAction.createFromJS({
           type: TYPE_BASIC,
           subtype: SUBTYPE_ATTACK,
           scope: TARGET_ENEMY,
@@ -89,7 +89,7 @@ const enhance = compose(
 
     handleBasicBlock: ({ actions }) => () => {
       actions.initiateAction({
-        action: BattleAction.fromJS({
+        action: BattleAction.createFromJS({
           type: TYPE_BASIC,
           subtype: SUBTYPE_DEFENSE,
           scope: TARGET_SELF,

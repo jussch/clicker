@@ -3,6 +3,7 @@
  */
 import { selectPlayer } from '../selectors/PlayerSelectors';
 import hasOneTarget from '../logic/battle/hasOneTarget';
+import getTargetIds from '../logic/battle/getTargetIds';
 import {
   PREPARE_ACTION,
   INITIATE_ACTION,
@@ -22,13 +23,16 @@ export default function battleManager({ getState, dispatch }) {
     if (!BATTLE_ACTIONS.has(action.type)) return next(action);
 
     const state = getState();
+    const player = selectPlayer(state);
     if (action.type === INITIATE_ACTION) {
       const { action: battleAction } = action.payload;
-      if (hasOneTarget(battleAction, state)) {
-        return dispatch(applyEffect({
-          user: selectPlayer(state),
-          action: battleAction,
-        }))
+      if (!player.canUseAction(battleAction)) {
+        return null;
+      }
+
+      if (hasOneTarget(battleAction, player, state)) {
+        const targets = getTargetIds(battleAction, player, state);
+        return executeBattleAction(battleAction, player, targets);
       }
 
       return dispatch(prepareAction({ action: battleAction }));
@@ -38,4 +42,12 @@ export default function battleManager({ getState, dispatch }) {
 
     }
   };
+
+  function executeBattleAction(battleAction, user, targetIds) {
+    return dispatch(applyEffect({
+      targetIds,
+      user,
+      action: battleAction,
+    }));
+  }
 }

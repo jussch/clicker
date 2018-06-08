@@ -15,7 +15,7 @@ import {
 } from '../actions/ResourceActions';
 
 export const initialState = Map(fromPairs(ALL_RESOURCES.map(resourceInfo => (
-  [resourceInfo.get('name'), new Resource({ name: resourceInfo.get('name') })]
+  [resourceInfo.get('name'), Resource.create({ name: resourceInfo.get('name') })]
 ))));
 
 export default handleActions({
