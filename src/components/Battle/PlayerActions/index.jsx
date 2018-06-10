@@ -11,6 +11,7 @@ import { initiateAction } from '../../../actions/BattleActions';
 import BattleAction from '../../../models/BattleAction';
 import { selectQueuedAction } from '../../../selectors/BattleSelectors';
 import CustomPropTypes from '../../../CustomPropTypes';
+import EndTurnButton from '../EndTurnButton';
 import {
   TARGET_ENEMY,
   TARGET_SELF,
@@ -42,6 +43,7 @@ function PlayerActions(props) {
         energyCost={10}
         onClick={handleBasicBlock}
       />
+      <EndTurnButton />
     </div>
   )
 }

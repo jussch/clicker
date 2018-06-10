@@ -1,23 +1,11 @@
 /**
  * Created by Justin-Desktop on 5/16/2018.
  */
+import createLoop from './utilities/createLoop';
 import { progressResources } from '../actions/ResourceActions';
 
 export default function incrementResources(store) {
-  let cancelled = false;
-  let startTime = Date.now();
-  function tick() {
-    const currentTime = Date.now();
-    const deltaTime = (currentTime - startTime) / 1000;
-    startTime = currentTime;
-
+  return createLoop((deltaTime) => {
     store.dispatch(progressResources(deltaTime));
-    if (!cancelled) requestAnimationFrame(tick);
-  }
-
-  requestAnimationFrame(tick);
-
-  return () => {
-    cancelled = true;
-  }
+  });
 }

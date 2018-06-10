@@ -8,6 +8,7 @@ import {
   PREPARE_ACTION,
   INITIATE_ACTION,
   SELECT_TARGET,
+  END_TURN,
   prepareAction,
   applyEffect,
 } from '../actions/BattleActions';
@@ -16,6 +17,7 @@ const BATTLE_ACTIONS = new Set([
   PREPARE_ACTION,
   INITIATE_ACTION,
   SELECT_TARGET,
+  END_TURN,
 ]);
 
 export default function battleManager({ getState, dispatch }) {
@@ -40,7 +42,11 @@ export default function battleManager({ getState, dispatch }) {
 
     } else if (action.type === SELECT_TARGET) {
 
+    } else if (action.type === END_TURN) {
+
     }
+
+    return next(action);
   };
 
   function executeBattleAction(battleAction, user, targetIds) {
