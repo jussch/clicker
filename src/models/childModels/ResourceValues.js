@@ -10,14 +10,11 @@ const ResourceValuesSchema = fromPairs(ALL_RESOURCES, resourceInfo => (
   [resourceInfo.get('name'), 0]
 ));
 
-console.log('ALL_RESOURCES:', ALL_RESOURCES);
-console.log('ResourceValuesSchema:', ResourceValuesSchema);
-
 const enhance = compose(
-
+  createModel(),
 );
 
-export default class ResourceValues extends enhance(createModel(ResourceValuesSchema)) {
+export default class ResourceValues extends enhance(ResourceValuesSchema) {
   // Might be unnecessary. Used to be a Immutable Record.Map bug.
   map(cb) {
     return ALL_RESOURCES.reduce((lastThis, resourceInfo) => (

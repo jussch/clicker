@@ -11,10 +11,10 @@ const UpgradeSchema = {
 };
 
 const enhance = compose(
-
+  createModel(),
 );
 
-export default class Upgrade extends enhance(createModel(UpgradeSchema)) {
+export default class Upgrade extends enhance(UpgradeSchema) {
   getUpgradeInfo() {
     return getUpgradeInfo(this.get('name'));
   }

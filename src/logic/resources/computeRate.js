@@ -5,7 +5,7 @@ import { Map } from 'immutable';
 import addMaps from '../../utilities/immutable/addMaps';
 import { selectBuildings } from '../../selectors/BuildingSelectors';
 import calculateBonuses from './calculateBonuses';
-import ValueAdjustment from '../../constants/utilities/ValueAdjustment';
+import ValueAdjustment from '../../models/ValueAdjustment';
 
 export default function computeRate(state) {
   const buildings = selectBuildings(state);

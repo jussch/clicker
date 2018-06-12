@@ -12,10 +12,10 @@ const BuildingSchema = {
 };
 
 const enhance = compose(
-
+  createModel(),
 );
 
-export default class Building extends enhance(createModel(BuildingSchema)) {
+export default class Building extends enhance(BuildingSchema) {
   getBuildingInfo() {
     return getBuildingInfo(this.get('name'));
   }

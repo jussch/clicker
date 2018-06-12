@@ -3,39 +3,41 @@
 */
 import { Record, fromJS } from 'immutable';
 
-export default function createModel(schema, options = {}) {
+export default function createModel(options = {}) {
   const {
     name =  null,
   } = options;
 
-  const enhancedSchema = {
-    ...schema,
-    id: null,
-  };
+  return (schema) => {
+    const enhancedSchema = {
+      ...schema,
+      id: null,
+    };
 
-  let idIndex = -1;
-  return class BaseModel extends Record(enhancedSchema) {
-    getId() {
-      return this.get('id');
-    }
+    let idIndex = -1;
+    return class BaseModel extends Record(enhancedSchema) {
+      getId() {
+        return this.get('id');
+      }
 
-    static create(data) {
-      return new this(data).set('id', this.generateId());
-    }
+      static create(data) {
+        return new this(data).set('id', this.generateId());
+      }
 
-    static generateId() {
-      idIndex += 1;
-      const usedName = name || this.name || `${Date.now()}`;
-      const prefix = usedName ? `${usedName}_` : '';
-      return `${prefix}${idIndex}`;
-    }
+      static generateId() {
+        idIndex += 1;
+        const usedName = name || this.name || `${Date.now()}`;
+        const prefix = usedName ? `${usedName}_` : '';
+        return `${prefix}${idIndex}`;
+      }
 
-    static fromJS(data) {
-      return new this(fromJS(data));
-    }
+      static fromJS(data) {
+        return new this(fromJS(data));
+      }
 
-    static createFromJS(data) {
-      return this.create(fromJS(data));
-    }
+      static createFromJS(data) {
+        return this.create(fromJS(data));
+      }
+    };
   };
 }

@@ -4,7 +4,7 @@
 import { Map, Iterable, List, Set } from 'immutable';
 import { selectBuildings } from '../../selectors/BuildingSelectors';
 import { selectUpgrades } from '../../selectors/UpgradeSelectors';
-import ValueAdjustment from '../../constants/utilities/ValueAdjustment';
+import ValueAdjustment from '../../models/ValueAdjustment';
 
 export default function calculateBonuses(state) {
   let totalBonuses = Map();

@@ -15,10 +15,10 @@ const BattleActionSchema = {
 };
 
 const enhance = compose(
-
+  createModel(),
 );
 
-export default class BattleAction extends enhance(createModel(BattleActionSchema)) {
+export default class BattleAction extends enhance(BattleActionSchema) {
   generateEffect(user) {
     return this.get('effects');
   }

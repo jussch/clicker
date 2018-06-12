@@ -1,6 +1,7 @@
 /**
  * Created by Justin on May 15, 2018
 */
+import { List } from 'immutable';
 
 export default function applyBattler(options = {}) {
   const {
@@ -9,14 +10,9 @@ export default function applyBattler(options = {}) {
 
   return (GivenClass) => {
     return class Battler extends GivenClass {
-      applyDamage(damage) {
-        return this.update('hp', hp => Math.max(hp - damage, 0));
-      }
-
-      applyEffect(effect) {
-        return this.applyDamage(effect.get('damage') || 0);
-      }
-
+      /**
+       * Readers
+       */
       isDead() {
         return this.get('hp') <= 0;
       }
@@ -37,20 +33,35 @@ export default function applyBattler(options = {}) {
         return this.hpUnderPercent(1 / 3);
       }
 
-      updateStartOfTurn() {
-        return this.set('block', 0);
-      }
-
       getAffiliation() {
         return affiliation;
       }
 
-      applyCost(battleAction) {
-        return this.update('mp', mp => clampValue(mp - battleAction.get('mpCost'), this.get('maxMp')))
-      }
-
       canUseAction(battleAction) {
         return this.get('mp') >= battleAction.get('mpCost');
+      }
+
+      getTriggers() {
+        return List();
+      }
+
+      /**
+       * Setters
+       */
+      applyDamage(damage) {
+        return this.update('hp', hp => Math.max(hp - damage, 0));
+      }
+
+      applyEffect(effect) {
+        return this.applyDamage(effect.get('damage') || 0);
+      }
+
+      updateStartOfTurn() {
+        return this.set('block', 0);
+      }
+
+      applyCost(battleAction) {
+        return this.update('mp', mp => clampValue(mp - battleAction.get('mpCost'), this.get('maxMp')))
       }
 
       resetState() {

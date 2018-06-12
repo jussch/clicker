@@ -3,7 +3,7 @@
  */
 import { compose } from 'recompose';
 import { List } from 'immutable';
-import createModel from '../../models/extensions/createModel';
+import createModel from './extensions/createModel';
 
 const ValueAdjustmentSchema = {
   rankPos: 1,
@@ -13,10 +13,10 @@ const ValueAdjustmentSchema = {
 };
 
 const enhance = compose(
-
+  createModel(),
 );
 
-export default class ValueAdjustment extends enhance(createModel(ValueAdjustmentSchema)) {
+export default class ValueAdjustment extends enhance(ValueAdjustmentSchema) {
   adjust(value) {
     const fixedValue = value + this.get('fixedAdd');
     const perAddValue = fixedValue * (1 + this.get('percentAdd'));

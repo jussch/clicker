@@ -3,7 +3,7 @@
  */
 import createInfo from './utilities/createInfo';
 import createNameMapper from './utilities/createNameMapper';
-import ValueAdjustment from './utilities/ValueAdjustment';
+import ValueAdjustment from '../models/ValueAdjustment';
 
 export const BUILDING_FARM = createInfo({
   name: 'farm',
