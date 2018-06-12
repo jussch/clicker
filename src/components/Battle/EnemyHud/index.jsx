@@ -86,9 +86,9 @@ const enhance = compose(
   connect(mapStateToProps, mapActionsToProps),
 
   withHandlers({
-    handleSelectTarget: ({ actions, enemyIndex }) => () => {
+    handleSelectTarget: ({ actions, enemy }) => () => {
       actions.selectTarget({
-        index: enemyIndex,
+        id: enemy.getId(),
         type: AFF_ENEMY,
       });
     },

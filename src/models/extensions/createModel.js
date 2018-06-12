@@ -1,10 +1,9 @@
 /**
  * Created by Justin on May 15, 2018
 */
-import { Record, fromJS } from 'immutable';
+import { Record, fromJS, Map } from 'immutable';
 import mapValues from 'lodash/mapValues';
-
-const allModels = new Map();
+import { getModel } from './allModels';
 
 export default function createModel(options = {}) {
   const {
@@ -40,22 +39,27 @@ export default function createModel(options = {}) {
       }
 
       static fromJS(data) {
-        const modelizedData = mapValues(childModels, (modelName, prop) => (
-          allModels.get('modelName').fromJS(data[prop])
+        const immData = Map(data);
+        const singleModelizedData = mapValues(childModels, (modelName, prop) => (
+          getModel(modelName).fromJS(immData.get(prop))
         ));
 
-        return new this(fromJS({
-          ...data,
-          ...modelizedData,
-        }));
+        return new this(fromJS(data)).merge(singleModelizedData);
       }
 
       static createFromJS(data) {
-        return this.create(fromJS(data));
+        const immData = Map(data);
+        const singleModelizedData = mapValues(childModels, (modelName, prop) => (
+          getModel(modelName).createFromJS(immData.get(prop))
+        ));
+
+        return this.create(fromJS(data)).merge(singleModelizedData);
+      }
+
+      static getModelName() {
+        return name;
       }
     }
-
-    allModels.set(name, BaseModel);
 
     return BaseModel;
   };

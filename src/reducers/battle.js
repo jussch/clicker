@@ -6,7 +6,7 @@ import { Map, List } from 'immutable';
 import {
   SETUP_BATTLE,
   PREPARE_ACTION,
-  APPLY_EFFECT,
+  APPLY_ACTION,
 } from '../actions/BattleActions';
 
 export const initialState = Map({
@@ -30,7 +30,7 @@ export default handleActions({
     return state.set('queuedAction', action.payload.action);
   },
 
-  [APPLY_EFFECT](state, action) {
+  [APPLY_ACTION](state, action) {
     const { action: battleAction, user, targetIds } = action.payload;
     const effect = battleAction.generateEffect(user);
 

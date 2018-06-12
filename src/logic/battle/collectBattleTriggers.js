@@ -16,19 +16,22 @@ export default function collectBattleTriggers(state) {
    * Collect enemy triggers first.
    */
   enemies.forEach((enemy) => {
-
+    if (enemy.isDead()) return;
+    battleTriggers = battleTriggers.concat(enemy.getTriggers());
   });
 
   /**
    * Collect ally triggers second.
    */
   allies.forEach((ally) => {
-
+    if (ally.isDead()) return;
+    battleTriggers = battleTriggers.concat(ally.getTriggers());
   });
 
   /**
    * Collect player triggers last.
    */
+  battleTriggers = battleTriggers.concat(player.getTriggers());
 
   return battleTriggers;
 }

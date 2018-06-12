@@ -2,6 +2,8 @@
  * Created by Justin on 6/1/2018.
  */
 import { selectPlayer } from '../selectors/PlayerSelectors';
+import { selectQueuedAction } from '../selectors/BattleSelectors';
+import triggerAutoBattle from '../logic/triggerAutoBattle';
 import hasOneTarget from '../logic/battle/hasOneTarget';
 import getTargetIds from '../logic/battle/getTargetIds';
 import {
@@ -10,7 +12,7 @@ import {
   SELECT_TARGET,
   END_TURN,
   prepareAction,
-  applyEffect,
+  applyAction,
 } from '../actions/BattleActions';
 
 const BATTLE_ACTIONS = new Set([
@@ -26,6 +28,8 @@ export default function battleManager({ getState, dispatch }) {
 
     const state = getState();
     const player = selectPlayer(state);
+    const queuedAction = selectQueuedAction(state);
+
     if (action.type === INITIATE_ACTION) {
       const { action: battleAction } = action.payload;
       if (!player.canUseAction(battleAction)) {
@@ -41,16 +45,18 @@ export default function battleManager({ getState, dispatch }) {
     } else if (action.type === PREPARE_ACTION) {
 
     } else if (action.type === SELECT_TARGET) {
+      if (!queuedAction) return null;
 
+      return executeBattleAction(queuedAction, player, new Set([action.payload.id]));
     } else if (action.type === END_TURN) {
-
+      triggerAutoBattle({ getState, dispatch });
     }
 
     return next(action);
   };
 
   function executeBattleAction(battleAction, user, targetIds) {
-    return dispatch(applyEffect({
+    return dispatch(applyAction({
       targetIds,
       user,
       action: battleAction,

@@ -7,6 +7,7 @@ import createModel from './extensions/createModel';
 
 const BattleEffectSchema = {
   damage: 0,
+  block: 0,
   manaDamage: 0,
   afflictions: List(),
 };

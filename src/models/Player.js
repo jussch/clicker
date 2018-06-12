@@ -9,7 +9,8 @@ import { AFF_PLAYER } from '../constants/BattleActions';
 export const Schema = {
   ...BATTLER_ATTRIBUTES,
   energy: 0,
-  maxEnergy: 100,
+  maxEnergy: 50,
+  energyRate: 25,
 };
 
 const enhance = compose(
@@ -33,5 +34,14 @@ export default class Player extends enhance(Schema) {
   canUseAction(battleAction) {
     return super.canUseAction(battleAction) &&
       this.get('energy') >= battleAction.get('energyCost');
+  }
+
+  resetState() {
+    return super.resetState().set('energy', this.get('energyRate'));
+  }
+
+  updateStartOfTurn() {
+    return super.updateStartOfTurn()
+      .update('energy', energy => Math.min(energy + this.get('energyRate'), this.get('maxEnergy')));
   }
 }

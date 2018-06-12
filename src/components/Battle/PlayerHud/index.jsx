@@ -22,6 +22,11 @@ function PlayerHud(props) {
       <h4 className={styles.header}>Player</h4>
       <div className={styles.data}>
         Health: <HpNumber value={player.get('hp')} max={player.get('maxHp')} />
+        {player.get('block') > 0 && (
+          <span className={styles.block}>
+            {` (`}<NumberDisplay value={player.get('block')}/>{`)`}
+          </span>
+        )}
         {' / '}
         <NumberDisplay value={player.get('maxHp')}/>
       </div>

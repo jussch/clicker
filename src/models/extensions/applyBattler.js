@@ -49,11 +49,23 @@ export default function applyBattler(options = {}) {
        * Setters
        */
       applyDamage(damage) {
-        return this.update('hp', hp => Math.max(hp - damage, 0));
+        if (damage === 0) return this;
+        const unblockedDamage = Math.max(0, damage - this.get('block'));
+        return this
+          .applyBlock(-damage)
+          .update('hp', hp => Math.max(hp - unblockedDamage, 0));
+      }
+
+      applyBlock(blockAmount) {
+        if (blockAmount === 0) return this;
+        return this.update('block', block => Math.max(0, block + blockAmount));
       }
 
       applyEffect(effect) {
-        return this.applyDamage(effect.get('damage') || 0);
+        console.log('effect:', effect);
+        return this
+          .applyDamage(effect.get('damage'))
+          .applyBlock(effect.get('block'));
       }
 
       updateStartOfTurn() {
