@@ -15,7 +15,12 @@ const BattleActionSchema = {
 };
 
 const enhance = compose(
-  createModel(),
+  createModel({
+    name: 'BattleAction',
+    childModels: {
+      effects: 'BattleEffect',
+    },
+  }),
 );
 
 export default class BattleAction extends enhance(BattleActionSchema) {

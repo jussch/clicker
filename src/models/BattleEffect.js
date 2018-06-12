@@ -12,7 +12,9 @@ const BattleEffectSchema = {
 };
 
 const enhance = compose(
-  createModel(),
+  createModel({
+    name: 'BattleEffect',
+  }),
 );
 
 export default class BattleEffect extends enhance(BattleEffectSchema) {

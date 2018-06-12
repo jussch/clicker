@@ -13,7 +13,9 @@ const ValueAdjustmentSchema = {
 };
 
 const enhance = compose(
-  createModel(),
+  createModel({
+    name: 'ValueAdjustment',
+  }),
 );
 
 export default class ValueAdjustment extends enhance(ValueAdjustmentSchema) {

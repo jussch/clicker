@@ -11,7 +11,9 @@ const ResourceValuesSchema = fromPairs(ALL_RESOURCES, resourceInfo => (
 ));
 
 const enhance = compose(
-  createModel(),
+  createModel({
+    name: 'ResourceValues',
+  }),
 );
 
 export default class ResourceValues extends enhance(ResourceValuesSchema) {

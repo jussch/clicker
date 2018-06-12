@@ -11,7 +11,9 @@ const CostSchema = {
 };
 
 const enhance = compose(
-  createModel(),
+  createModel({
+    name: 'Cost',
+  }),
 );
 
 export default class Cost extends enhance(CostSchema) {

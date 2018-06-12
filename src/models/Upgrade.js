@@ -11,7 +11,9 @@ const UpgradeSchema = {
 };
 
 const enhance = compose(
-  createModel(),
+  createModel({
+    name: 'Upgrade',
+  }),
 );
 
 export default class Upgrade extends enhance(UpgradeSchema) {

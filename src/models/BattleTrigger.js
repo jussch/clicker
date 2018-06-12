@@ -12,7 +12,13 @@ const BattleTriggerSchema = {
 };
 
 const enhance = compose(
-  createModel(),
+  createModel({
+    name: 'BattleTrigger',
+    childModels: {
+      action: 'BattleAction',
+      effect: 'BattleEffect',
+    },
+  }),
 );
 
 export default class BattleTrigger extends enhance(BattleTriggerSchema) {

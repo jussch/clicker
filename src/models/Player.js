@@ -16,9 +16,13 @@ const enhance = compose(
   applyBattler({
     affiliation: AFF_PLAYER,
   }),
+
+  createModel({
+    name: 'Player',
+  }),
 );
 
-export default class Player extends enhance(createModel(Schema)) {
+export default class Player extends enhance(Schema) {
   applyCost(battleAction) {
     return super.applyCost(battleAction)
       .update('energy', energy => (

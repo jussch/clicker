@@ -15,7 +15,10 @@ const enhance = compose(
   applyBattler({
     affiliation: AFF_ENEMY,
   }),
-  createModel(),
+
+  createModel({
+    name: 'Enemy',
+  }),
 );
 
 export default class Enemy extends enhance(Schema) {

@@ -12,7 +12,9 @@ export const Schema = {
 };
 
 const enhance = compose(
-  createModel(),
+  createModel({
+    name: 'Resource',
+  }),
 );
 
 export default class Resource extends enhance(Schema) {

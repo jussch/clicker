@@ -12,7 +12,9 @@ const BuildingSchema = {
 };
 
 const enhance = compose(
-  createModel(),
+  createModel({
+    name: 'Building',
+  }),
 );
 
 export default class Building extends enhance(BuildingSchema) {

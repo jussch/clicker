@@ -2,11 +2,19 @@
  * Created by Justin on May 15, 2018
 */
 import { Record, fromJS } from 'immutable';
+import mapValues from 'lodash/mapValues';
+
+const allModels = new Map();
 
 export default function createModel(options = {}) {
   const {
-    name =  null,
+    name = null,
+    childModels = {},
   } = options;
+
+  if (name == null) {
+    throw new Error('createModel requires the "name" option.');
+  }
 
   return (schema) => {
     const enhancedSchema = {
@@ -15,7 +23,7 @@ export default function createModel(options = {}) {
     };
 
     let idIndex = -1;
-    return class BaseModel extends Record(enhancedSchema) {
+    class BaseModel extends Record(enhancedSchema) {
       getId() {
         return this.get('id');
       }
@@ -32,12 +40,23 @@ export default function createModel(options = {}) {
       }
 
       static fromJS(data) {
-        return new this(fromJS(data));
+        const modelizedData = mapValues(childModels, (modelName, prop) => (
+          allModels.get('modelName').fromJS(data[prop])
+        ));
+
+        return new this(fromJS({
+          ...data,
+          ...modelizedData,
+        }));
       }
 
       static createFromJS(data) {
         return this.create(fromJS(data));
       }
-    };
+    }
+
+    allModels.set(name, BaseModel);
+
+    return BaseModel;
   };
 }
