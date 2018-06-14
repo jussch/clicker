@@ -54,6 +54,7 @@ const enhance = compose(
             power: 13,
             defense: 5,
           }).resetState(),
+
           Enemy.create({
             name: 'Rat 2',
             maxHp: 25,

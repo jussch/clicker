@@ -2,7 +2,11 @@
  * Created by Justin on 6/1/2018.
  */
 import { selectPlayer } from '../selectors/PlayerSelectors';
-import { selectQueuedAction } from '../selectors/BattleSelectors';
+import {
+  selectEnemies,
+  selectQueuedAction,
+  selectBattleActive,
+} from '../selectors/BattleSelectors';
 import triggerAutoBattle from '../logic/triggerAutoBattle';
 import hasOneTarget from '../logic/battle/hasOneTarget';
 import getTargetIds from '../logic/battle/getTargetIds';
@@ -13,6 +17,7 @@ import {
   END_TURN,
   prepareAction,
   applyAction,
+  endBattle,
 } from '../actions/BattleActions';
 
 const BATTLE_ACTIONS = new Set([
@@ -23,8 +28,23 @@ const BATTLE_ACTIONS = new Set([
 ]);
 
 export default function battleManager({ getState, dispatch }) {
+  /**
+   * The Main BattleManager Middleware
+   */
   return next => (action) => {
-    if (!BATTLE_ACTIONS.has(action.type)) return next(action);
+    rerouteAction(action);
+    const returnValue = next(action);
+    checkIfBattleIsComplete();
+    return returnValue;
+  };
+
+  /**
+   * Compares the action and modifies it depending on the current state.
+   * @param action
+   * @returns {*}
+   */
+  function rerouteAction(action) {
+    if (!BATTLE_ACTIONS.has(action.type)) return null;
 
     const state = getState();
     const player = selectPlayer(state);
@@ -51,9 +71,29 @@ export default function battleManager({ getState, dispatch }) {
     } else if (action.type === END_TURN) {
       triggerAutoBattle({ getState, dispatch });
     }
+  }
 
-    return next(action);
-  };
+  /**
+   * Check if battle is complete.
+   * @returns {*}
+   */
+  function checkIfBattleIsComplete() {
+    const state = getState();
+    const enemies = selectEnemies(state);
+    const battleIsActive = selectBattleActive(state);
+
+    if (!battleIsActive || enemies.size === 0) return false;
+
+    const everyEnemyIsDead = enemies.every(enemy => enemy.isDead());
+    console.log('everyEnemyIsDead:', everyEnemyIsDead);
+    if (everyEnemyIsDead) {
+      dispatch(endBattle({
+        rewards: null,
+      }));
+    }
+
+    return everyEnemyIsDead;
+  }
 
   function executeBattleAction(battleAction, user, targetIds) {
     return dispatch(applyAction({

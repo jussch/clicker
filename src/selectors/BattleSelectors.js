@@ -6,6 +6,10 @@ export function selectBattleState(state) {
   return state.get('battle');
 }
 
+export function selectBattleActive(state) {
+  return selectBattleState(state).get('isActive');
+}
+
 export function selectEnemies(state) {
   return selectBattleState(state).get('enemies');
 }
@@ -32,4 +36,8 @@ export function selectAlly(index) {
 
 export function selectQueuedAction(state) {
   return selectBattleState(state).get('queuedAction');
+}
+
+export function selectRewards(state) {
+  return selectBattleState(state).get('rewards');
 }

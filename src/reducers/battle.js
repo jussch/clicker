@@ -7,6 +7,7 @@ import {
   SETUP_BATTLE,
   PREPARE_ACTION,
   APPLY_ACTION,
+  END_BATTLE,
 } from '../actions/BattleActions';
 
 export const initialState = Map({
@@ -15,6 +16,7 @@ export const initialState = Map({
   phase: null,
   isActive: false,
   queuedAction: null,
+  rewards: null,
 });
 
 export default handleActions({
@@ -24,6 +26,14 @@ export default handleActions({
       .set('allies', allies)
       .set('enemies', enemies)
       .set('isActive', true);
+  },
+
+  [END_BATTLE](state, action) {
+    const { rewards } = action.payload;
+
+    return state
+      .set('rewards', List(rewards))
+      .set('isActive', false);
   },
 
   [PREPARE_ACTION](state, action) {

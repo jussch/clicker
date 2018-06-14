@@ -46,7 +46,7 @@ function EnemyHud(props) {
       <div className={styles.actions}>
         <Button
           primary
-          disabled={!hasQueuedAction}
+          disabled={!hasQueuedAction || isDead}
           label="Select"
           onClick={handleSelectTarget}
         />
