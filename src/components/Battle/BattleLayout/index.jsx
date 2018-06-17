@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import PlayerHud from '../PlayerHud';
 import PlayerActions from '../PlayerActions';
 import EnemyTroopHud from '../EnemyTroopHud';
+import BattleRewardsDisplay from '../BattleRewardsDisplay';
 
 function BattleLayout(props) {
   return (
@@ -15,6 +16,7 @@ function BattleLayout(props) {
       <PlayerHud />
       <PlayerActions />
       <EnemyTroopHud />
+      <BattleRewardsDisplay />
     </div>
   );
 }

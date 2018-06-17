@@ -1,6 +1,8 @@
 /**
  * Created by Justin on 6/1/2018.
  */
+import { List } from 'immutable';
+import BattleReward from '../models/BattleReward';
 import { selectPlayer } from '../selectors/PlayerSelectors';
 import {
   selectEnemies,
@@ -88,7 +90,12 @@ export default function battleManager({ getState, dispatch }) {
     console.log('everyEnemyIsDead:', everyEnemyIsDead);
     if (everyEnemyIsDead) {
       dispatch(endBattle({
-        rewards: null,
+        rewards: List([
+          BattleReward.create({
+            name: 'gold',
+            quantity: 2000,
+          }).setResourceReward()
+        ]),
       }));
     }
 

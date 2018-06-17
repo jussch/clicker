@@ -8,6 +8,7 @@ import {
   PREPARE_ACTION,
   APPLY_ACTION,
   END_BATTLE,
+  TAKE_REWARD,
 } from '../actions/BattleActions';
 
 export const initialState = Map({
@@ -51,5 +52,9 @@ export default handleActions({
 
         return enemy.applyEffect(effect);
       }));
+  },
+
+  [TAKE_REWARD](state, action) {
+    return state.deleteIn(['rewards', action.payload.index]);
   },
 }, initialState)
