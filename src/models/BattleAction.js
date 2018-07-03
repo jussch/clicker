@@ -4,6 +4,7 @@
 import { compose } from 'recompose';
 import { Map } from 'immutable';
 import createModel from './extensions/createModel';
+import { getModel } from './extensions/allModels';
 
 const BattleActionSchema = {
   type: null,
@@ -25,6 +26,13 @@ const enhance = compose(
 
 export default class BattleAction extends enhance(BattleActionSchema) {
   generateEffect(user) {
+    const Player = getModel('Player');
+    if (user instanceof Player) {
+      return this.get('effects').update('damage', damage => (
+        damage * user.getComboMod()
+      ));
+    }
+
     return this.get('effects');
   }
 }

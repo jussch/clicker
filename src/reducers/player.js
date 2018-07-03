@@ -25,7 +25,7 @@ export default handleActions({
     }
 
     if (user.getId() === nextPlayer.getId()) {
-      nextPlayer = nextPlayer.applyCost(battleAction);
+      nextPlayer = nextPlayer.applyCost(battleAction).addCombo();
     }
 
     return nextPlayer;
