@@ -7,6 +7,7 @@ import buildings from './buildings';
 import player from './player';
 import resources from './resources';
 import upgrades from './upgrades';
+import view from './view';
 
 export default combineReducers({
   battle,
@@ -14,4 +15,5 @@ export default combineReducers({
   player,
   resources,
   upgrades,
+  view,
 });
