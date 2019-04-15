@@ -61,10 +61,15 @@ export default function applyBattler(options = {}) {
         return this.update('block', block => Math.max(0, block + blockAmount));
       }
 
+      calculateResistance(damage) {
+        const defense = this.get('defense');
+        const absDefense = Math.abs(defense);
+        return damage * (1 - (defense / (absDefense + 32)));
+      }
+
       applyEffect(effect) {
-        console.log('effect:', effect);
         return this
-          .applyDamage(effect.get('damage'))
+          .applyDamage(this.calculateResistance(effect.get('damage')))
           .applyBlock(effect.get('block'));
       }
 

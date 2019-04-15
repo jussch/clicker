@@ -31,7 +31,13 @@ function PlayerHud(props) {
         <NumberDisplay value={player.get('maxHp')}/>
       </div>
       <div className={styles.data}>
+        Mana: <NumberDisplay value={player.get('mp')} /> / <NumberDisplay value={player.get('maxMp')}/>
+      </div>
+      <div className={styles.data}>
         Energy: <NumberDisplay value={player.get('energy')} /> / <NumberDisplay value={player.get('maxEnergy')}/>
+      </div>
+      <div className={styles.data}>
+        Combo: <NumberDisplay value={player.get('combo')} /> / <NumberDisplay value={player.get('maxCombo')}/>
       </div>
     </div>
   );
