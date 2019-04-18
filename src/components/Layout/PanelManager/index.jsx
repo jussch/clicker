@@ -8,6 +8,8 @@ import { connect } from 'react-redux';
 import getPanelByType from '../../Panels/getPanelByType';
 import { selectActivePanel } from '../../../selectors/ViewSelectors';
 
+import styles from './panelManager.scss';
+
 function PanelManager(props) {
   const {
     panelType,
@@ -16,7 +18,7 @@ function PanelManager(props) {
   const Panel = getPanelByType(panelType);
 
   return (
-    <div>
+    <div className={styles.manager}>
       <Panel />
     </div>
   );

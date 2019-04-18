@@ -17,14 +17,20 @@ export const initialState = Map({
 export default handleActions({
   [CHANGE_ACTIVE_PANEL](state, action) {
     const { panel } = action.payload;
-    if (!ALL_PANELS.includes(panel)) return state;
+    if (!ALL_PANELS.includes(panel)) {
+      console.warn('Invalid panelType:', panel);
+      return state;
+    }
 
-    return state;
+    return state.set('activePanel', panel);
   },
 
   [TOGGLE_OVERLAY_MENU](state, action) {
     const { active, overlay } = action.payload;
-    if (!ALL_OVERLAYS.includes(overlay)) return state;
+    if (!ALL_OVERLAYS.includes(overlay)) {
+      console.warn('Invalid overlay:', overlay);
+      return state;
+    }
 
     if (active == null) {
       return state.update('activeOverlays', overlays => (

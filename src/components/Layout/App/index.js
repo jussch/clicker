@@ -2,13 +2,8 @@ import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import createStore from '../../../store/index';
 import { getMainStore, setMainStore } from '../../../store/MainStore';
-import ResourcePanel from '../../Resources/ResourcePanel';
-import BuildingPanel from '../../Buildings/BuildingPanel';
-import UpgradePanel from '../../Upgrades/UpgradePanel';
-import WorkButton from '../../Player/WorkButton';
-import BattleInitiator from '../../Battle/BattleInitiator';
 import Header from '../Header';
-import BattleLayout from '../../Battle/BattleLayout';
+import PanelManager from '../PanelManager';
 
 import styles from './App.scss';
 
@@ -46,16 +41,7 @@ class App extends Component {
       <Provider store={store}>
         <div className={styles.app}>
           <Header />
-          <div className={styles.appIntro}>
-            <ResourcePanel />
-            <BuildingPanel />
-            <UpgradePanel />
-          </div>
-          <div className={styles.appIntro}>
-            <WorkButton />
-            <BattleInitiator />
-            <BattleLayout />
-          </div>
+          <PanelManager />
         </div>
       </Provider>
     );

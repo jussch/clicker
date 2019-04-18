@@ -15,6 +15,12 @@ export const ALL_PANELS = [
   STATS_PANEL,
 ];
 
+export const PANEL_NAMES = {
+  [BATTLE_PANEL]: 'Battle',
+  [VILLAGE_PANEL]: 'Village',
+  [STATS_PANEL]: 'Stats',
+};
+
 /**
  * Overlays
  */
