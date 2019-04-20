@@ -1,9 +1,23 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  /*font-family: sans-serif;*/
+  font-family: 'Overpass Mono', monospace;
 }
 
 *, *:after, *:before {
     box-sizing: border-box;
+}
+
+div, span, ul, li, ol, h1, h2, h3, h4, h5, header, main, nav, button, a {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  list-style: none;
+  outline: 0;
+  color: inherit;
+  background: transparent;
+  font-weight: inherit;
+  font-style: inherit;
+  font-family: inherit;
 }
