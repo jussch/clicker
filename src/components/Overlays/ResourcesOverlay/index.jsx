@@ -1,24 +1,20 @@
 /**
- * Created by Justin on 4/17/2019.
+ * Created by Justin on 4/21/2019.
  */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import BuildingPanel from '../../Buildings/BuildingPanel';
-import UpgradePanel from '../../Upgrades/UpgradePanel';
+import ResourcePanel from '../../Resources/ResourcePanel';
 
-function VillagePanel(props) {
+function ResourcesOverlay(props) {
   return (
-    <div>
-      <BuildingPanel />
-      <UpgradePanel />
-    </div>
+    <ResourcePanel />
   );
 }
 
-VillagePanel.propTypes = {
+ResourcesOverlay.propTypes = {
   // connect
   actions: PropTypes.objectOf(PropTypes.func),
 };
@@ -37,4 +33,4 @@ const enhance = compose(
   connect(mapStateToProps, mapActionsToProps),
 );
 
-export default enhance(VillagePanel);
+export default enhance(ResourcesOverlay);

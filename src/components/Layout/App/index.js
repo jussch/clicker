@@ -4,6 +4,7 @@ import createStore from '../../../store/index';
 import { getMainStore, setMainStore } from '../../../store/MainStore';
 import Header from '../Header';
 import PanelManager from '../PanelManager';
+import OverlayManager from '../OverlayManager';
 
 import styles from './App.scss';
 
@@ -42,6 +43,7 @@ class App extends Component {
         <div className={styles.app}>
           <Header />
           <PanelManager />
+          <OverlayManager />
         </div>
       </Provider>
     );
