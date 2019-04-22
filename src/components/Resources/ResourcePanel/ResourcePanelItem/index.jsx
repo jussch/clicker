@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import { selectResource } from '../../../../selectors/ResourceSelectors';
 import CustomPropTypes from '../../../../CustomPropTypes';
 import NumberDisplay from '../../../Library/NumberDisplay';
+import RateDisplay from '../../../Library/RateDisplay';
 
 import styles from './resourcePanelItem.scss';
 
@@ -25,7 +26,7 @@ function ResourcePanelItem(props) {
       </span>
       <NumberDisplay value={resource.get('amount')} className={styles.value} />
       <span className={styles.rate}>
-        (+<NumberDisplay value={resource.get('perSecond')} />/s)
+        (<RateDisplay rate={resource.getTotalRate()} />)
       </span>
     </div>
   );

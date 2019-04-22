@@ -1,0 +1,13 @@
+@import '../../../variables';
+
+.normal {
+  color: rgba(#333, 0.7);
+}
+
+.negative {
+  color: rgba($danger-color, 0.7);
+}
+
+.positive {
+  color: rgba($success-color, 0.7);
+}

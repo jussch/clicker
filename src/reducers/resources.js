@@ -32,7 +32,7 @@ export default handleActions({
   [PROGRESS_RESOURCES](state, action) {
     const deltaTime = action.payload;
     return state.map(resource => (
-      resource.update('amount', amount => resource.get('perSecond') * deltaTime + amount)
+      resource.update('amount', amount => resource.getTotalRate() * deltaTime + amount)
     ));
   },
 
@@ -42,7 +42,7 @@ export default handleActions({
       const resourceRate = resourceRates.get(resource.get('name'));
       if (resourceRate == null) return resource;
 
-      return resource.set('perSecond', resourceRate);
+      return resource.set('gainPerSecond', resourceRate);
     });
   },
 

@@ -54,7 +54,7 @@ const enhance = compose(
   connect(mapStateToProps, mapActionsToProps),
   withHandlers({
     updateGoldPerSecond: ({ actions, goldPerSecond }) => () => {
-      actions.updateGold({ perSecond: goldPerSecond + 1 });
+      actions.updateGold({ gainPerSecond: goldPerSecond + 1 });
     },
   }),
 );

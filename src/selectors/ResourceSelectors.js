@@ -12,7 +12,7 @@ export function selectCurrentGold(state) {
 }
 
 export function selectGoldPerSecond(state) {
-  return selectResources(state).getIn(['gold', 'perSecond']);
+  return selectResources(state).get('gold').getTotalRate();
 }
 
 export function selectResource(resourceName) {

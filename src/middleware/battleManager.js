@@ -87,7 +87,7 @@ export default function battleManager({ getState, dispatch }) {
     if (!battleIsActive || enemies.size === 0) return false;
 
     const everyEnemyIsDead = enemies.every(enemy => enemy.isDead());
-    console.log('everyEnemyIsDead:', everyEnemyIsDead);
+
     if (everyEnemyIsDead) {
       dispatch(endBattle({
         rewards: List([
