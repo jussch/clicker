@@ -24,6 +24,14 @@ export default class Resource extends enhance(Schema) {
   }
 
   getTotalRate() {
+    if (this.get('amount') <= 0) return 0;
+
     return this.get('gainPerSecond') - this.get('lossPerSecond');
+  }
+
+  progress(deltaTime) {
+    return this.update('amount', amount => (
+      Math.max(this.getTotalRate() * deltaTime + amount, 0)
+    ));
   }
 }

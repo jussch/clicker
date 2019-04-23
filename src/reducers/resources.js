@@ -32,7 +32,7 @@ export default handleActions({
   [PROGRESS_RESOURCES](state, action) {
     const deltaTime = action.payload;
     return state.map(resource => (
-      resource.update('amount', amount => resource.getTotalRate() * deltaTime + amount)
+      resource.progress(deltaTime)
     ));
   },
 
